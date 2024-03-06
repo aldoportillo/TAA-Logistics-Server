@@ -17,6 +17,11 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
+  # Setup Default URL Options for the Devise mailer
+
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
