@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
   # GET /applications or /applications.json
   def index
