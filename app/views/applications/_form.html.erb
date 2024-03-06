@@ -1,0 +1,362 @@
+<%= form_with(model: application) do |form| %>
+  <% if application.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+      <ul>
+        <% application.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= form.label :middle_initial, style: "display: block" %>
+    <%= form.text_field :middle_initial %>
+  </div>
+
+  <div>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :state, style: "display: block" %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :zip, style: "display: block" %>
+    <%= form.text_field :zip %>
+  </div>
+
+  <div>
+    <%= form.label :birthday, style: "display: block" %>
+    <%= form.date_field :birthday %>
+  </div>
+
+  <div>
+    <%= form.label :ssn, style: "display: block" %>
+    <%= form.text_field :ssn %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :residency_address_1, style: "display: block" %>
+    <%= form.text_field :residency_address_1 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_city_1, style: "display: block" %>
+    <%= form.text_field :residency_city_1 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_state_1, style: "display: block" %>
+    <%= form.text_field :residency_state_1 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_zip_1, style: "display: block" %>
+    <%= form.text_field :residency_zip_1 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_address_2, style: "display: block" %>
+    <%= form.text_field :residency_address_2 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_city_2, style: "display: block" %>
+    <%= form.text_field :residency_city_2 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_state_2, style: "display: block" %>
+    <%= form.text_field :residency_state_2 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_zip_2, style: "display: block" %>
+    <%= form.text_field :residency_zip_2 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_address_3, style: "display: block" %>
+    <%= form.text_field :residency_address_3 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_city_3, style: "display: block" %>
+    <%= form.text_field :residency_city_3 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_state_3, style: "display: block" %>
+    <%= form.text_field :residency_state_3 %>
+  </div>
+
+  <div>
+    <%= form.label :residency_zip_3, style: "display: block" %>
+    <%= form.text_field :residency_zip_3 %>
+  </div>
+
+  <div>
+    <%= form.label :license_state, style: "display: block" %>
+    <%= form.text_field :license_state %>
+  </div>
+
+  <div>
+    <%= form.label :license_number, style: "display: block" %>
+    <%= form.text_field :license_number %>
+  </div>
+
+  <div>
+    <%= form.label :license_type, style: "display: block" %>
+    <%= form.text_field :license_type %>
+  </div>
+
+  <div>
+    <%= form.label :license_expiration_date, style: "display: block" %>
+    <%= form.date_field :license_expiration_date %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_date_1, style: "display: block" %>
+    <%= form.date_field :conviction_date_1 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_violation_1, style: "display: block" %>
+    <%= form.text_field :conviction_violation_1 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_state_1, style: "display: block" %>
+    <%= form.text_field :conviction_state_1 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_penalty_1, style: "display: block" %>
+    <%= form.text_field :conviction_penalty_1 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_date_2, style: "display: block" %>
+    <%= form.date_field :conviction_date_2 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_violation_2, style: "display: block" %>
+    <%= form.text_field :conviction_violation_2 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_state_2, style: "display: block" %>
+    <%= form.text_field :conviction_state_2 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_penalty_2, style: "display: block" %>
+    <%= form.text_field :conviction_penalty_2 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_date_3, style: "display: block" %>
+    <%= form.date_field :conviction_date_3 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_violation_3, style: "display: block" %>
+    <%= form.text_field :conviction_violation_3 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_state_3, style: "display: block" %>
+    <%= form.text_field :conviction_state_3 %>
+  </div>
+
+  <div>
+    <%= form.label :conviction_penalty_3, style: "display: block" %>
+    <%= form.text_field :conviction_penalty_3 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_class_1, style: "display: block" %>
+    <%= form.text_field :experience_class_1 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_type_1, style: "display: block" %>
+    <%= form.text_field :experience_type_1 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_start_date_1, style: "display: block" %>
+    <%= form.date_field :experience_start_date_1 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_end_date_1, style: "display: block" %>
+    <%= form.date_field :experience_end_date_1 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_miles_1, style: "display: block" %>
+    <%= form.number_field :experience_miles_1 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_class_2, style: "display: block" %>
+    <%= form.text_field :experience_class_2 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_type_2, style: "display: block" %>
+    <%= form.text_field :experience_type_2 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_start_date_2, style: "display: block" %>
+    <%= form.date_field :experience_start_date_2 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_end_date_2, style: "display: block" %>
+    <%= form.date_field :experience_end_date_2 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_miles_2, style: "display: block" %>
+    <%= form.number_field :experience_miles_2 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_class_3, style: "display: block" %>
+    <%= form.text_field :experience_class_3 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_type_3, style: "display: block" %>
+    <%= form.text_field :experience_type_3 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_start_date_3, style: "display: block" %>
+    <%= form.date_field :experience_start_date_3 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_end_date_3, style: "display: block" %>
+    <%= form.date_field :experience_end_date_3 %>
+  </div>
+
+  <div>
+    <%= form.label :experience_miles_3, style: "display: block" %>
+    <%= form.number_field :experience_miles_3 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_date_1, style: "display: block" %>
+    <%= form.date_field :accident_date_1 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_nature_1, style: "display: block" %>
+    <%= form.text_field :accident_nature_1 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_fatalities_1, style: "display: block" %>
+    <%= form.number_field :accident_fatalities_1 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_injuries_1, style: "display: block" %>
+    <%= form.number_field :accident_injuries_1 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_spill_1, style: "display: block" %>
+    <%= form.check_box :accident_spill_1 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_date_2, style: "display: block" %>
+    <%= form.date_field :accident_date_2 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_nature_2, style: "display: block" %>
+    <%= form.text_field :accident_nature_2 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_fatalities_2, style: "display: block" %>
+    <%= form.number_field :accident_fatalities_2 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_injuries_2, style: "display: block" %>
+    <%= form.number_field :accident_injuries_2 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_spill_2, style: "display: block" %>
+    <%= form.check_box :accident_spill_2 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_date_3, style: "display: block" %>
+    <%= form.date_field :accident_date_3 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_nature_3, style: "display: block" %>
+    <%= form.text_field :accident_nature_3 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_fatalities_3, style: "display: block" %>
+    <%= form.number_field :accident_fatalities_3 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_injuries_3, style: "display: block" %>
+    <%= form.number_field :accident_injuries_3 %>
+  </div>
+
+  <div>
+    <%= form.label :accident_spill_3, style: "display: block" %>
+    <%= form.check_box :accident_spill_3 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
