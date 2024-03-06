@@ -1,0 +1,112 @@
+<%= form_with(model: quote) do |form| %>
+  <% if quote.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+
+      <ul>
+        <% quote.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :company_name, style: "display: block" %>
+    <%= form.text_field :company_name %>
+  </div>
+
+  <div>
+    <%= form.label :contact_name, style: "display: block" %>
+    <%= form.text_field :contact_name %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :phone, style: "display: block" %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div>
+    <%= form.label :fax, style: "display: block" %>
+    <%= form.text_field :fax %>
+  </div>
+
+  <div>
+    <%= form.label :commodity, style: "display: block" %>
+    <%= form.text_field :commodity %>
+  </div>
+
+  <div>
+    <%= form.label :commodity_temp, style: "display: block" %>
+    <%= form.number_field :commodity_temp %>
+  </div>
+
+  <div>
+    <%= form.label :commodity_gross_weight, style: "display: block" %>
+    <%= form.number_field :commodity_gross_weight %>
+  </div>
+
+  <div>
+    <%= form.label :from, style: "display: block" %>
+    <%= form.text_field :from %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_date, style: "display: block" %>
+    <%= form.date_field :delivery_date %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_zip_code, style: "display: block" %>
+    <%= form.text_field :delivery_zip_code %>
+  </div>
+
+  <div>
+    <%= form.label :shipping_date, style: "display: block" %>
+    <%= form.date_field :shipping_date %>
+  </div>
+
+  <div>
+    <%= form.label :shipping_zip_code, style: "display: block" %>
+    <%= form.text_field :shipping_zip_code %>
+  </div>
+
+  <div>
+    <%= form.label :CS, style: "display: block" %>
+    <%= form.number_field :CS %>
+  </div>
+
+  <div>
+    <%= form.label :container_size, style: "display: block" %>
+    <%= form.text_field :container_size %>
+  </div>
+
+  <div>
+    <%= form.label :pallets, style: "display: block" %>
+    <%= form.number_field :pallets %>
+  </div>
+
+  <div>
+    <%= form.label :equipment_type, style: "display: block" %>
+    <%= form.text_field :equipment_type %>
+  </div>
+
+  <div>
+    <%= form.label :rail_destination, style: "display: block" %>
+    <%= form.text_field :rail_destination %>
+  </div>
+
+  <div>
+    <%= form.label :questions_or_notes, style: "display: block" %>
+    <%= form.text_field :questions_or_notes %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

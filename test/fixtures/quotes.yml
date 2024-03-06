@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company_name: MyString
+  contact_name: MyString
+  email: MyString
+  phone: MyString
+  fax: MyString
+  commodity: MyString
+  commodity_temp: 1
+  commodity_gross_weight: 1
+  from: MyString
+  delivery_date: 2024-03-06
+  delivery_zip_code: MyString
+  shipping_date: 2024-03-06
+  shipping_zip_code: MyString
+  CS: 1
+  container_size: MyString
+  pallets: 1
+  equipment_type: MyString
+  rail_destination: MyString
+  questions_or_notes: MyString
+
+two:
+  company_name: MyString
+  contact_name: MyString
+  email: MyString
+  phone: MyString
+  fax: MyString
+  commodity: MyString
+  commodity_temp: 1
+  commodity_gross_weight: 1
+  from: MyString
+  delivery_date: 2024-03-06
+  delivery_zip_code: MyString
+  shipping_date: 2024-03-06
+  shipping_zip_code: MyString
+  CS: 1
+  container_size: MyString
+  pallets: 1
+  equipment_type: MyString
+  rail_destination: MyString
+  questions_or_notes: MyString
