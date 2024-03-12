@@ -8,6 +8,10 @@ gem "rails", "~> 7.1.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+# Gem for searching
+
+gem 'ransack'
+
 # Gem for CORS support [
 gem 'rack-cors'
 
