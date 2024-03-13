@@ -3,12 +3,28 @@
 <h1>Quotes</h1>
 
 <div id="quotes">
-  <% @quotes.each do |quote| %>
-    <%= render quote %>
-    <p>
-      <%= link_to "Show this quote", quote %>
-    </p>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Company Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Delivery Date</th>
+        <th>From</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @quotes.each do |quote| %>
+        <tr>     
+            <td><%= quote.company_name %></td>
+            <td><%= quote.email %></td>
+            <td><%= quote.phone %></td>
+            <td><%= quote.delivery_date %></td>
+            <td><%= quote.from %></td>
+          <td><%= link_to "Show this quote", quote %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New quote", new_quote_path %>
