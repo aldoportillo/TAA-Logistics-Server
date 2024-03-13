@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
+<div class="d-flex justify-content-between align-items-center">
+  <h1>Quote Details</h1>
+  <div>
+    <%= link_to "Back to quotes", quotes_path, class: "btn btn-primary" %> |
+    <%= button_to "Destroy this quote", @quote, method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>
+
 <%= render @quote %>
 
-<div>
-  <%= link_to "Edit this quote", edit_quote_path(@quote) %> |
-  <%= link_to "Back to quotes", quotes_path %>
 
-  <%= button_to "Destroy this quote", @quote, method: :delete %>
-</div>

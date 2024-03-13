@@ -1,97 +1,113 @@
-<div id="<%= dom_id quote %>">
-  <p>
-    <strong>Company name:</strong>
-    <%= quote.company_name %>
-  </p>
+<div id="<%= dom_id quote %>" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
 
-  <p>
-    <strong>Contact name:</strong>
-    <%= quote.contact_name %>
-  </p>
+  <div style="display: flex; flex-wrap: wrap;">
+    <div style="flex: 1; margin-right: 20px;">
+      <h4>Contact Information</h4>
+      <p>
+        <strong>Company Name:</strong>
+        <%= quote.company_name %>
+      </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= quote.email %>
-  </p>
+      <p>
+        <strong>Contact Name:</strong>
+        <%= quote.contact_name %>
+      </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= quote.phone %>
-  </p>
+      <p>
+        <strong>Email:</strong>
+        <%= quote.email %>
+      </p>
 
-  <p>
-    <strong>Fax:</strong>
-    <%= quote.fax %>
-  </p>
+      <p>
+        <strong>Phone:</strong>
+        <%= quote.phone %>
+      </p>
 
-  <p>
-    <strong>Commodity:</strong>
-    <%= quote.commodity %>
-  </p>
+      <p>
+        <strong>Fax:</strong>
+        <%= quote.fax %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Commodity temp:</strong>
-    <%= quote.commodity_temp %>
-  </p>
+    <div style="flex: 1;">
+      <h4>Commodity Information</h4>
+      <p>
+        <strong>Commodity:</strong>
+        <%= quote.commodity %>
+      </p>
 
-  <p>
-    <strong>Commodity gross weight:</strong>
-    <%= quote.commodity_gross_weight %>
-  </p>
+      <p>
+        <strong>Commodity Temp:</strong>
+        <%= quote.commodity_temp %>
+      </p>
 
-  <p>
-    <strong>From:</strong>
-    <%= quote.from %>
-  </p>
+      <p>
+        <strong>Commodity Gross Weight:</strong>
+        <%= quote.commodity_gross_weight %>
+      </p>
+    </div>
+  </div>
 
-  <p>
-    <strong>Delivery date:</strong>
-    <%= quote.delivery_date %>
-  </p>
+  <div style="display: flex; flex-wrap: wrap;">
+    <div style="flex: 1; margin-right: 20px;">
+      <h4>Shipping Information</h4>
+      <p>
+        <strong>From:</strong>
+        <%= quote.from %>
+      </p>
 
-  <p>
-    <strong>Delivery zip code:</strong>
-    <%= quote.delivery_zip_code %>
-  </p>
+      <p>
+        <strong>Delivery Date:</strong>
+        <%= quote.delivery_date %>
+      </p>
 
-  <p>
-    <strong>Shipping date:</strong>
-    <%= quote.shipping_date %>
-  </p>
+      <p>
+        <strong>Delivery Zip Code:</strong>
+        <%= quote.delivery_zip_code %>
+      </p>
 
-  <p>
-    <strong>Shipping zip code:</strong>
-    <%= quote.shipping_zip_code %>
-  </p>
+      <p>
+        <strong>Shipping Date:</strong>
+        <%= quote.shipping_date %>
+      </p>
 
-  <p>
-    <strong>Cs:</strong>
-    <%= quote.CS %>
-  </p>
+      <p>
+        <strong>Shipping Zip Code:</strong>
+        <%= quote.shipping_zip_code %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Container size:</strong>
-    <%= quote.container_size %>
-  </p>
+    <div style="flex: 1;">
+      <h4>Additional Information</h4>
+      <p>
+        <strong>Cs:</strong>
+        <%= quote.CS %>
+      </p>
 
-  <p>
-    <strong>Pallets:</strong>
-    <%= quote.pallets %>
-  </p>
+      <p>
+        <strong>Container Size:</strong>
+        <%= quote.container_size %>
+      </p>
 
-  <p>
-    <strong>Equipment type:</strong>
-    <%= quote.equipment_type %>
-  </p>
+      <p>
+        <strong>Pallets:</strong>
+        <%= quote.pallets %>
+      </p>
 
-  <p>
-    <strong>Rail destination:</strong>
-    <%= quote.rail_destination %>
-  </p>
+      <p>
+        <strong>Equipment Type:</strong>
+        <%= quote.equipment_type %>
+      </p>
 
-  <p>
-    <strong>Questions or notes:</strong>
-    <%= quote.questions_or_notes %>
-  </p>
+      <p>
+        <strong>Rail Destination:</strong>
+        <%= quote.rail_destination %>
+      </p>
 
+      <p>
+        <strong>Questions or Notes:</strong>
+        <%= quote.questions_or_notes %>
+      </p>
+    </div>
+  </div>
 </div>
