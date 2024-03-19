@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
 
   # GET /applications or /applications.json
   def index
-    @applications = Application.all
+    @applications = Application.order(created_at: :desc)
   end
 
   # GET /applications/1 or /applications/1.json

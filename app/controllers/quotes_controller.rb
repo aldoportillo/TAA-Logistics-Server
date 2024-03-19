@@ -4,7 +4,7 @@ class QuotesController < ApplicationController
 
   # GET /quotes or /quotes.json
   def index
-    @quotes = Quote.all
+    @quotes = Quote.order(created_at: :desc)
 
     pp form_authenticity_token
 
