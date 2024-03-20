@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Inquiries</h1>
+
+<div id="inquiries">
+  <% @inquiries.each do |inquiry| %>
+    <%= render inquiry %>
+    <p>
+      <%= link_to "Show this inquiry", inquiry %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New inquiry", new_inquiry_path %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @inquiry %>
+
+<div>
+  <%= link_to "Edit this inquiry", edit_inquiry_path(@inquiry) %> |
+  <%= link_to "Back to inquiries", inquiries_path %>
+
+  <%= button_to "Destroy this inquiry", @inquiry, method: :delete %>
+</div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :inquiries
   resources :applications
   resources :quotes
   devise_for :users
