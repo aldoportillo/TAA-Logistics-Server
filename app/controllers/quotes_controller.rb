@@ -7,7 +7,7 @@ class QuotesController < ApplicationController
     
     @q = Quote.order(created_at: :desc).ransack(params[:q])
   
-    @quotes = @q.result(distinct: true)
+    authorize @quotes = @q.result(distinct: true)
   
     # paginate the results if needed
     # @quotes = @quotes.page(params[:page])
@@ -21,6 +21,7 @@ class QuotesController < ApplicationController
   # GET /quotes/1 or /quotes/1.json
   def show
     @quote = Quote.find(params[:id])
+    authorize @quote
 
     respond_to do |format|
       format.html
@@ -67,7 +68,8 @@ class QuotesController < ApplicationController
 
   # DELETE /quotes/1 or /quotes/1.json
   def destroy
-    @quote.destroy!
+    
+    authorize @quote.destroy!
 
     respond_to do |format|
       format.html { redirect_to quotes_url, notice: "Quote was successfully destroyed." }

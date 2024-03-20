@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
     
     @q = Application.order(created_at: :desc).ransack(params[:q])
   
-    @applications = @q.result(distinct: true)
+    authorize @applications = @q.result(distinct: true)
   
     # paginate the results if needed
     # @applications = @applications.page(params[:page])
@@ -20,6 +20,8 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1 or /applications/1.json
   def show
+    @application = Application.find(params[:id])
+    authorize @application
   end
 
   # GET /applications/new
@@ -61,7 +63,7 @@ class ApplicationsController < ApplicationController
 
   # DELETE /applications/1 or /applications/1.json
   def destroy
-    @application.destroy!
+   authorize @application.destroy!
 
     respond_to do |format|
       format.html { redirect_to applications_url, notice: "Application was successfully destroyed." }

@@ -12,6 +12,10 @@ gem "sprockets-rails"
 
 gem 'ransack'
 
+# Gem for pundit
+
+gem 'pundit'
+
 # Gem for CORS support [
 gem 'rack-cors'
 

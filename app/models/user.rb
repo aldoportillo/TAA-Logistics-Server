@@ -3,4 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+         def admin?
+          role == 'admin'
+        end
+      
+        def hiring?
+          role == 'hiring'
+        end
+      
+        def broker?
+          role == 'broker'
+        end
 end
