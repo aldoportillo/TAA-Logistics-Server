@@ -4,7 +4,18 @@ class ApplicationsController < ApplicationController
 
   # GET /applications or /applications.json
   def index
-    @applications = Application.order(created_at: :desc)
+    
+    @q = Application.order(created_at: :desc).ransack(params[:q])
+  
+    @applications = @q.result(distinct: true)
+  
+    # paginate the results if needed
+    # @applications = @applications.page(params[:page])
+  
+    respond_to do |format|
+      format.html
+      format.json { render json: @applications }
+    end
   end
 
   # GET /applications/1 or /applications/1.json

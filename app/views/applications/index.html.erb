@@ -1,6 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Applications</h1>
+<div class="row justify-content-between align-items-center">
+  <h2 class="col-auto">Applications</h2>
+
+  <%= search_form_for @q, url: applications_path, method: :get, html: { class: 'form-inline' } do |f| %>
+  <div class="form-group mb-2">
+    <%= f.label :first_name_or_last_name_cont, "Name", class: 'mr-2' %>
+    <%= f.search_field :first_name_or_last_name_cont, class: 'form-control' %>
+  </div>
+  <div class="form-group mx-sm-3 mb-2">
+    <%= f.submit "Search", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+</div>
 
 <div id="applications">
   <table class="table">
@@ -10,18 +23,21 @@
         <th>Last Name</th>
         <th>Phone</th>
         <th>Email</th>
+        <th>Submitted</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-  <% @applications.each do |application| %>
-    <tr>     
-      <td><%= application.first_name %></td>
-      <td><%= application.last_name %></td>
-      <td><%= application.phone_number %></td>
-      <td><%= application.email %></td>
-      <td><%= link_to "Show this application", application %></td>
-    </tr>
-  <% end %>
-  </tbody>
+      <% @q.result.each do |application| %>
+        <tr>
+          <td><%= application.first_name %></td>
+          <td><%= application.last_name %></td>
+          <td><%= application.phone_number %></td>
+          <td><%= application.email %></td>
+          <td><%= application.created_at.strftime("%B %d, %Y") %></td>
+          <td><%= link_to "Show this application", application %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

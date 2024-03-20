@@ -4,10 +4,14 @@ class QuotesController < ApplicationController
 
   # GET /quotes or /quotes.json
   def index
-    @quotes = Quote.order(created_at: :desc)
-
-    pp form_authenticity_token
-
+    
+    @q = Quote.order(created_at: :desc).ransack(params[:q])
+  
+    @quotes = @q.result(distinct: true)
+  
+    # paginate the results if needed
+    # @quotes = @quotes.page(params[:page])
+  
     respond_to do |format|
       format.html
       format.json { render json: @quotes }
