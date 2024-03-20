@@ -1,14 +1,33 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Inquiries</h1>
+<div class="row justify-content-between align-items-center">
+  <h2 class="col-auto">Inquiries</h2>
 
-<div id="inquiries">
-  <% @inquiries.each do |inquiry| %>
-    <%= render inquiry %>
-    <p>
-      <%= link_to "Show this inquiry", inquiry %>
-    </p>
-  <% end %>
 </div>
-
-<%= link_to "New inquiry", new_inquiry_path %>
+<div id="inquiries">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Message</th>
+        <th>Submitted</th>
+        <th>Actions</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <% @inquiries.each do |inquiry| %>
+        <tr>     
+            <td><%= inquiry.name %></td>
+            <td><%= inquiry.email_address %></td>
+            <td><%= inquiry.phone_number %></td>
+            <td><%= inquiry.message %></td>
+            <td><%= inquiry.created_at.strftime("%B %d, %Y") %></td>
+          <td><%= link_to "Show this inquiry", inquiry %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
