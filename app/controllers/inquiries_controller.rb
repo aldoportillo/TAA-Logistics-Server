@@ -1,5 +1,6 @@
 class InquiriesController < ApplicationController
   before_action :set_inquiry, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
   # GET /inquiries or /inquiries.json
   def index

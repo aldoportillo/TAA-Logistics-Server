@@ -1,22 +1,24 @@
-<div id="<%= dom_id inquiry %>">
-  <p>
-    <strong>Name:</strong>
-    <%= inquiry.name %>
-  </p>
+<div id="<%= dom_id inquiry %>" class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Inquiry Details</h5>
+    <p class="card-text">
+      <strong>Name:</strong>
+      <%= inquiry.name %>
+    </p>
 
-  <p>
-    <strong>Phone number:</strong>
-    <%= inquiry.phone_number %>
-  </p>
+    <p class="card-text">
+      <strong>Phone number:</strong>
+      <%= inquiry.phone_number %>
+    </p>
 
-  <p>
-    <strong>Email address:</strong>
-    <%= inquiry.email_address %>
-  </p>
+    <p class="card-text">
+      <strong>Email address:</strong>
+      <%= inquiry.email_address %>
+    </p>
 
-  <p>
-    <strong>Message:</strong>
-    <%= inquiry.message %>
-  </p>
-
+    <p class="card-text">
+      <strong>Message:</strong>
+      <%= inquiry.message %>
+    </p>
+  </div>
 </div>
