@@ -1,26 +1,28 @@
 class EmployeesController < ApplicationController
-    #before_action :set_application, only: %i[ show edit update destroy ]
+    before_action :set_employee, only: [:show, :edit, :update]
+  after_action :verify_authorized
 
     def index
         @employees = User.all
+        authorize User
     end
 
     def show
-        @employee = User.find(params[:id])
         render :show
+        authorize @employee
     end
 
     def edit
-        @employee = User.find(params[:id])
+        authorize @employee
     end
 
     def update
-        @employee = User.find(params[:id])
         if @employee.update(employee_params)
           redirect_to employee_path(@employee), notice: 'Employee was successfully updated.'
         else
           render :edit
         end
+        authorize @employee
     end
 
 
@@ -28,5 +30,9 @@ class EmployeesController < ApplicationController
 
     def employee_params
         params.require(:user).permit(:name, :email, :role)
+    end
+
+    def set_employee
+        @employee = User.find(params[:id])
     end
 end

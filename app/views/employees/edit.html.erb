@@ -15,7 +15,7 @@
 
         <div class="form-group">
             <%= f.label :role %>
-            <%= f.select :role, options_for_select(["user", "admin", "hiring", "broker"]), class: "form-control" %>
+            <%= f.select :role, options_for_select(["user", "admin", "hiring", "broker"], @employee.role), class: "form-control" %>
         </div>
 
         <div class="form-group">
