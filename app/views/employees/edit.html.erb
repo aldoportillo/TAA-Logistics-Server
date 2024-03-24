@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Edit Employee</h1>
+
+   <%= form_with(model: @employee, url: employee_path(@employee), method: :patch, local: true, class: "form") do |f| %>
+        <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+
+        <div class="form-group">
+            <%= f.label :role %>
+            <%= f.select :role, options_for_select(["user", "admin", "hiring", "broker"]), class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.submit "Update Employee", class: "btn btn-primary" %>
+        </div>
+    <% end %>
+</div>
