@@ -29,7 +29,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @q.result.each do |application| %>
+      <% @applications.each do |application| %>
         <tr>
           <td><%= application.first_name %></td>
           <td><%= application.last_name %></td>
@@ -46,4 +46,5 @@
       <% end %>
     </tbody>
   </table>
+  <%= paginate @applications %>
 </div>

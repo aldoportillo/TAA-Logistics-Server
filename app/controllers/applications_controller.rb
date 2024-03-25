@@ -7,11 +7,8 @@ class ApplicationsController < ApplicationController
     
     @q = Application.order(created_at: :desc).ransack(params[:q])
   
-    authorize @applications = @q.result(distinct: true)
-  
-    # paginate the results if needed
-    # @applications = @applications.page(params[:page])
-  
+    authorize @applications = @q.result(distinct: true).page(params[:page]).per(15)
+
     respond_to do |format|
       format.html
       format.json { render json: @applications }

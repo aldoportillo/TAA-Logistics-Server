@@ -4,7 +4,10 @@ class InquiriesController < ApplicationController
 
   # GET /inquiries or /inquiries.json
   def index
-    authorize @inquiries = Inquiry.all
+    @q = Inquiry.order(created_at: :desc).ransack(params[:q])
+  
+    authorize @inquiries = @q.result(distinct: true).page(params[:page]).per(5)
+
   end
 
   # GET /inquiries/1 or /inquiries/1.json

@@ -12,6 +12,14 @@ gem "sprockets-rails"
 
 gem 'ransack'
 
+# Gem for pagination
+
+gem 'kaminari'
+
+# Gem to style pagination
+
+gem 'bootstrap-kaminari-views'
+
 # Gem for pundit
 
 gem 'pundit'

@@ -4,14 +4,11 @@ class QuotesController < ApplicationController
 
   # GET /quotes or /quotes.json
   def index
-    
+
     @q = Quote.order(created_at: :desc).ransack(params[:q])
   
-    authorize @quotes = @q.result(distinct: true)
-  
-    # paginate the results if needed
-    # @quotes = @quotes.page(params[:page])
-  
+    authorize @quotes = @q.result(distinct: true).page(params[:page]).per(5)
+
     respond_to do |format|
       format.html
       format.json { render json: @quotes }
