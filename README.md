@@ -1,24 +1,18 @@
-# README
+# TAA Logistics Server
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Specifications
 
-Things you may want to cover:
+The TAA Logistics Server is a Ruby on Rails application designed to manage logistics operations for TAA. It uses PostgreSQL for data storage. This serves as an API for the React Client as well.
 
-* Ruby version
+### Requirements
 
-* System dependencies
+- Ruby 2.7.0 or later
+- Rails 6.0.0 or later
+- PostgreSQL 12.0 or later
 
-* Configuration
+## Deployment Notes
 
-* Database creation
+Before deploying the TAA Logistics Server, please ensure the following:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. **SMTP Mailer**: Setup SMTP in production.rb
+2. **Configure CSRF**: Make sure only the main domain can make requests to the API
