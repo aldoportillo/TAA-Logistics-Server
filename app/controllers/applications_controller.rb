@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
     
     @q = Application.order(created_at: :desc).ransack(params[:q])
   
-    authorize @applications = @q.result(distinct: true).page(params[:page]).per(15)
+    authorize @applications = @q.result(distinct: true).page(params[:page]).per(20)
 
     respond_to do |format|
       format.html

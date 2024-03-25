@@ -16,7 +16,7 @@
 </div>
 
 <div id="applications">
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>First Name</th>
@@ -41,7 +41,7 @@
               <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
             <% end %>
           </td>
-          <td><%= link_to "Show this application", application %></td>
+          <td><%= link_to "Show this application", application, class: 'btn btn-info' %></td>
         </tr>
       <% end %>
     </tbody>

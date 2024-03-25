@@ -5,7 +5,7 @@
 
 </div>
 <div id="inquiries">
-  <table class="table">
+  <table class="table table-striped ">
     <thead>
       <tr>
         <th>Name</th>
@@ -30,7 +30,7 @@
                 <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
               <% end %>
             </td>
-            <td><%= link_to "Show this inquiry", inquiry %></td>
+            <td><%= link_to "Show this inquiry", inquiry, class: 'btn btn-info' %></td>
         </tr>
       <% end %>
     </tbody>

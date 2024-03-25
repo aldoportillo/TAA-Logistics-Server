@@ -15,7 +15,7 @@
 
 </div>
 <div id="quotes">
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Company Name</th>
@@ -42,7 +42,7 @@
               <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
             <% end %>
           </td>
-          <td><%= link_to "Show this quote", quote %></td>
+          <td><%= link_to "Show this quote", quote, class: 'btn btn-info' %></td>
         </tr>
       <% end %>
     </tbody>

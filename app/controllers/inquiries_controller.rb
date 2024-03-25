@@ -6,7 +6,7 @@ class InquiriesController < ApplicationController
   def index
     @q = Inquiry.order(created_at: :desc).ransack(params[:q])
   
-    authorize @inquiries = @q.result(distinct: true).page(params[:page]).per(5)
+    authorize @inquiries = @q.result(distinct: true).page(params[:page]).per(20)
 
   end
 

@@ -7,7 +7,7 @@ class QuotesController < ApplicationController
 
     @q = Quote.order(created_at: :desc).ransack(params[:q])
   
-    authorize @quotes = @q.result(distinct: true).page(params[:page]).per(5)
+    authorize @quotes = @q.result(distinct: true).page(params[:page]).per(20)
 
     respond_to do |format|
       format.html
