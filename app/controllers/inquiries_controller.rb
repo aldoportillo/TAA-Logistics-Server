@@ -67,6 +67,6 @@ class InquiriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inquiry_params
-      params.require(:inquiry).permit(:name, :phone_number, :email_address, :message)
+      params.require(:inquiry).permit(:name, :phone_number, :email_address, :message, :contacted)
     end
 end
