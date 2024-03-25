@@ -4,14 +4,11 @@ class QuotesController < ApplicationController
 
   # GET /quotes or /quotes.json
   def index
-    
+
     @q = Quote.order(created_at: :desc).ransack(params[:q])
   
-    authorize @quotes = @q.result(distinct: true)
-  
-    # paginate the results if needed
-    # @quotes = @quotes.page(params[:page])
-  
+    authorize @quotes = @q.result(distinct: true).page(params[:page]).per(20)
+
     respond_to do |format|
       format.html
       format.json { render json: @quotes }
@@ -85,6 +82,6 @@ class QuotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quote_params
-      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes)
+      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes, :contacted)
     end
 end

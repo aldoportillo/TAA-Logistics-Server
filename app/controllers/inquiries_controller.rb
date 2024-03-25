@@ -4,7 +4,10 @@ class InquiriesController < ApplicationController
 
   # GET /inquiries or /inquiries.json
   def index
-    authorize @inquiries = Inquiry.all
+    @q = Inquiry.order(created_at: :desc).ransack(params[:q])
+  
+    authorize @inquiries = @q.result(distinct: true).page(params[:page]).per(20)
+
   end
 
   # GET /inquiries/1 or /inquiries/1.json
@@ -67,6 +70,6 @@ class InquiriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def inquiry_params
-      params.require(:inquiry).permit(:name, :phone_number, :email_address, :message)
+      params.require(:inquiry).permit(:name, :phone_number, :email_address, :message, :contacted)
     end
 end

@@ -16,7 +16,7 @@
 </div>
 
 <div id="applications">
-  <table class="table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>First Name</th>
@@ -24,20 +24,27 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Submitted</th>
+        <th>Contacted</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% @q.result.each do |application| %>
+      <% @applications.each do |application| %>
         <tr>
           <td><%= application.first_name %></td>
           <td><%= application.last_name %></td>
           <td><%= application.phone_number %></td>
           <td><%= application.email %></td>
           <td><%= application.created_at.strftime("%B %d, %Y") %></td>
-          <td><%= link_to "Show this application", application %></td>
+          <td>
+            <%= form_with(model: application, url: application_path(application), method: :patch, local: true) do |f| %>
+              <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
+            <% end %>
+          </td>
+          <td><%= link_to "Show this application", application, class: 'btn btn-info' %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  <%= paginate @applications %>
 </div>
