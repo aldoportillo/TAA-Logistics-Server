@@ -13,8 +13,8 @@
         <th>Phone</th>
         <th>Message</th>
         <th>Submitted</th>
+        <th>Contacted</th>
         <th>Actions</th>
-        
       </tr>
     </thead>
     <tbody>
@@ -25,7 +25,12 @@
             <td><%= inquiry.phone_number %></td>
             <td><%= inquiry.message %></td>
             <td><%= inquiry.created_at.strftime("%B %d, %Y") %></td>
-          <td><%= link_to "Show this inquiry", inquiry %></td>
+            <td>
+              <%= form_with(model: inquiry, url: inquiry_path(inquiry), method: :patch, local: true) do |f| %>
+                <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
+              <% end %>
+            </td>
+            <td><%= link_to "Show this inquiry", inquiry %></td>
         </tr>
       <% end %>
     </tbody>

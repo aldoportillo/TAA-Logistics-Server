@@ -24,8 +24,8 @@
         <th>Delivery Date</th>
         <th>From</th>
         <th>Submitted</th>
+        <th>Contacted</th>
         <th>Actions</th>
-        
       </tr>
     </thead>
     <tbody>
@@ -37,6 +37,11 @@
             <td><%= quote.delivery_date&.strftime("%B %d, %Y") %></td>
             <td><%= quote.from %></td>
             <td><%= quote.created_at.strftime("%B %d, %Y") %></td>
+            <td>
+            <%= form_with(model: quote, url: quote_path(quote), method: :patch, local: true) do |f| %>
+              <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
+            <% end %>
+          </td>
           <td><%= link_to "Show this quote", quote %></td>
         </tr>
       <% end %>
