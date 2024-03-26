@@ -4,6 +4,8 @@
 </p>
 <ul>
   <li><strong>Contact Name:</strong> <%= @inquiry.name %><br></li>
-    <li><strong>Email:</strong> <%= @inquiry.email_address %></li>
-    <li><strong>Message:</strong> <%= @inquiry.message %></li>
+  <li><strong>Email:</strong> <%= @inquiry.email_address %></li>
+  <li><strong>Message:</strong> <%= @inquiry.message %></li>
 </ul>
+
+<p>Click <a href="https://taa-logistics-server.onrender.com/inquiries/<%= @inquiry.id %>">here</a> to see the full inquiry.</p>
