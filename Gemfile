@@ -16,6 +16,10 @@ gem 'ransack'
 
 gem 'kaminari'
 
+# Gem for postmark
+
+gem 'postmark-rails'
+
 # Gem to style pagination
 
 gem 'bootstrap-kaminari-views'
