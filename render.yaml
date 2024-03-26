@@ -1,7 +1,22 @@
+databases:
+  - name: taa-logistics-server
+    databaseName: taa-logistics-server
+    user: taa-logistics-server
+    plan: free
+
 services:
   - type: web
-    name: TAA-LOGISTICS-SERVER
-    env: ruby
+    name: taa-logistics-server
+    runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"
-    startCommand: "./bin/render-start.sh" 
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: taa-logistics-server
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2
