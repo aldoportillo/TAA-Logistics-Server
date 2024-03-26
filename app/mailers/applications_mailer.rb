@@ -1,9 +1,9 @@
 class ApplicationsMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'aporti4@uillinois.edu'
 
   def new_application_email(application)
     @application = application
-    mail(to: 'aldoportillodev@gmail.com', subject: 'New application Received')
+    mail(to: 'aporti4@uillinois.edu', subject: 'New application Received')
   end
 
 end

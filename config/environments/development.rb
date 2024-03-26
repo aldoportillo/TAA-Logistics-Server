@@ -24,7 +24,11 @@ Rails.application.configure do
 
   # Setup letter_opener to preview emails in the browser
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
   config.action_mailer.perform_deliveries = true
 
   # Enable/disable caching. By default caching is disabled.
