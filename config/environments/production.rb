@@ -4,8 +4,9 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Email Delivery Settings
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :postmark
-config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
+  config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_TOKEN'] }
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
