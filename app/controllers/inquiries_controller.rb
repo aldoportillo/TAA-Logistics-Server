@@ -1,6 +1,6 @@
 class InquiriesController < ApplicationController
   before_action :set_inquiry, only: %i[ show edit update destroy ]
-  skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
+  # skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
   # GET /inquiries or /inquiries.json
   def index
@@ -24,18 +24,13 @@ class InquiriesController < ApplicationController
   def edit
   end
 
-  # POST /inquiries or /inquiries.json
+  # POST /inquiries.json
   def create
-    @inquiry = Inquiry.new(inquiry_params)
-
-    respond_to do |format|
-      if @inquiry.save
-        format.html { redirect_to inquiry_url(@inquiry), notice: "Inquiry was successfully created." }
-        format.json { render :show, status: :created, location: @inquiry }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @inquiry.errors, status: :unprocessable_entity }
-      end
+    inquiry = Inquiry.new(inquiry_params)
+    if inquiry.save
+      render json: { message: 'Inquiry submitted successfully', csrf_token: form_authenticity_token }, status: :created
+    else
+      render json: { errors: inquiry.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

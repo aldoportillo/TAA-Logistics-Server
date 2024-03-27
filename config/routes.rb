@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :employees, controller: 'employees'
+  get 'csrf_token', to: 'csrf_tokens#show'
 
   # Defines the root path route ("/")
   
