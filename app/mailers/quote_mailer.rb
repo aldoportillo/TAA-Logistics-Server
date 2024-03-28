@@ -1,9 +1,9 @@
 class QuoteMailer < ApplicationMailer
-    default from: 'aporti4@uillinois.edu'
+    default from: 'ed@taalogistics.com'
   
     def new_quote_email(quote)
       @quote = quote
-      mail(to: 'aporti4@uillinois.edu', subject: 'New Quote Received')
+      mail(to: 'ed@taalogistics.com', subject: 'New Quote Received')
     end
   end
   
