@@ -1,8 +1,8 @@
 User.find_or_create_by!(
-  email: 'admin@example.com'
+  email: 'ed@taalogistics.com'
 ) do |user|
-  user.password = 'password'
-  user.password_confirmation = 'password'
+  user.password = ENV['ADMIN_PASSWORD']
+  user.password_confirmation = ENV['ADMIN_PASSWORD']
   user.role = 'admin'
-  user.name = 'Admin'
+  user.name = 'Ed'
 end
