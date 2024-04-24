@@ -1,2 +1,21 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<div class="container mt-4">
+  <h1 class="mb-3"><%= @event.name %></h1>
+  <p class="mb-4"><%= @event.description %></p>
+
+  <h3 class="mb-3">Images</h3>
+  <div class="images row">
+    <% @event&.images&.each do |image| %>
+      <div class="col-md-4 mb-3">
+        <%= image_tag(image.url, class: 'img-fluid') %>
+      </div>
+    <% end %>
+  </div>
+
+  <h3 class="mb-3">Add a new image</h3>
+  <%= form_with(model: [@event, Image.new], url: event_images_path(@event), local: true, multipart: true, html: { class: 'form' }) do |form| %>
+    <div class="mb-3">
+      <%= form.file_field :file, accept: 'image/png,image/jpeg,image/webp', class: 'form-control' %>
+    </div>
+    <%= form.submit "Upload Image", class: 'btn btn-primary' %>
+  <% end %>
+</div>
