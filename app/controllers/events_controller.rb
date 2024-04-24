@@ -32,6 +32,8 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
+    authorize Event
+
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -45,6 +47,8 @@ class EventsController < ApplicationController
   end
 
   def update
+    authorize @event
+
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -57,6 +61,8 @@ class EventsController < ApplicationController
   end
 
   def edit
+    authorize @event
+    
     respond_to do |format|
       format.html
       format.json { render json: { message: "No view needed for this action" } }

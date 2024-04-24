@@ -1,5 +1,8 @@
 class ImagesController < ApplicationController
+
   def create
+    authorize Image
+
     event = Event.find(params[:event_id])
     uploaded_image = Cloudinary::Uploader.upload(params[:image][:file].tempfile.path, folder: "taa/events")
 
@@ -16,6 +19,8 @@ class ImagesController < ApplicationController
   end
 
   def destroy
+    authorize Image
+    
     image = Image.find(params[:id])
     if image.destroy
       head :no_content
