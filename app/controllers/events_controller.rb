@@ -19,6 +19,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: { event: @event, images: @event.images } }
+    end
+  end
+
+  def edit
+
+  end
+
   # POST /events
   def create
     @event = Event.new(event_params)
@@ -33,15 +44,25 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-
+  def update
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { render json: @event, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def edit
-    
+    respond_to do |format|
+      format.html
+      format.json { render json: { message: "No view needed for this action" } }
+    end
   end
-  # Other actions...
-  
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
