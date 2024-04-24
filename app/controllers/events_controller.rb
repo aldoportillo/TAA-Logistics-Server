@@ -1,12 +1,33 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:index]
 
   # GET /events
   def index
-    @events = Event.all
+    @events = Event.includes(:images).all
+  
+    formatted_events = @events.map do |event|
+      {
+        id: event.id,
+        name: event.name,
+        description: event.description,
+        created_at: event.created_at.iso8601,
+        updated_at: event.updated_at.iso8601,
+        images: event.images.map { |image|
+          {
+            id: image.id,
+            event_id: image.event_id,
+            url: image.url,
+            created_at: image.created_at.iso8601,
+            updated_at: image.updated_at.iso8601
+          }
+        }
+      }
+    end
+  
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @events }
+      format.json { render json: formatted_events }
     end
   end
 
