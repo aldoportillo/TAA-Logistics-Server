@@ -15,5 +15,6 @@ The TAA Logistics Server is a Ruby on Rails application designed to manage logis
 Before deploying the TAA Logistics Server, please ensure the following:
 
 1. **SMTP Mailer**: Setup SMTP in production.rb
-2. **Configure CSRF**: Make sure only the main domain can make requests to the API
-3. **Configure CORS**: Make sure to switch cors to the domain: # config/initializers/cors.rb
+2. **Cloudinary**: Setup 
+3. **Configure CSRF**: Make sure only the main domain can make requests to the API
+4. **Configure CORS**: Make sure to switch cors to the domain: # config/initializers/cors.rb
