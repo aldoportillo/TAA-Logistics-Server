@@ -18,3 +18,58 @@ The TAA Logistics Server is a Ruby on Rails application designed to manage logis
 | **CLOUDINARY** | Used for image storage | CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET | free |
 | **RENDER** | Used for hosting | ADMIN_PASSWORD, CORS_ORIGIN | $12 |
 | **TWILIO** | Used for SMS | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN | undefined |
+
+## Meeting Notes
+
+- Fix Junk Mail Issue
+
+## New Features
+
+### CRM
+
+An issue we are currently facing is too much business, so we are looking to automate rates.
+
+For legal weight, we are looking at this algorithm for line haul (LH)
+
+`LH = 2 * distance * MKT`
+
+Where LH is line haul, MKT is market average per mile and distance is the distance between ramp destinations
+
+We add that with the fuel surcharge (FSCH)
+
+`FSCH = (SCH% * LH) + LH`
+
+Where SCH% is the surcharge based off the U.S. National Diesel Average. You can find the info [here](https://docs.google.com/spreadsheets/d/1w3quOQFzR_akIpolkxJCbTilG2C7c3Aa/edit?usp=sharing&ouid=111587941505182220372&rtpof=true&sd=true)
+
+#### Flat Rates
+
+##### Chassis/ Splits Charges
+
+- Reg. Chassis: $40 per day
+- Chassis Split: $85 per split
+- Pre Pull: $150
+- Yard Storage: $45 per day
+
+##### For Exports, If No Billing or rail won’t accept the container after loaded by the customer the following charges will apply
+
+- Rail Redelivery: $250
+- Yard Storage: $45 per day
+- Chassis: $40 per day
+
+#### Outline for Website
+
+1. Receive email from client
+2. Take From and To
+3. Get distance using GMAPS API and boolean for tolls
+4. Store data for less API calls later on
+5. Use the res to get LH and FSCH
+6. Send notification to dispatch in the quotes email
+
+#### Outline for Bids
+
+1. Receive Bids Email
+2. Upload CSV file for Bids
+3. Get distances using GMAPS API and boolean for tolls
+4. Iterate through bids and add column for distance, tolls, LH, FSCH, and Price
+5. Store data for less API calls later on
+6. Return Updated CSV downloadable to return quotes
