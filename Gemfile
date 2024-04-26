@@ -16,6 +16,9 @@ gem 'dotenv-rails'
 
 gem 'ransack'
 
+# Used for sending SMS
+gem 'twilio-ruby'
+
 # Used for image upload
 gem "cloudinary"
 
