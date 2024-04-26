@@ -16,6 +16,9 @@ gem 'dotenv-rails'
 
 gem 'ransack'
 
+# Used for image upload
+gem "cloudinary"
+
 # Gem for pagination
 
 gem 'kaminari'
@@ -82,9 +85,6 @@ group :development do
 
   # Used to preview emails in browser
   gem "letter_opener"
-
-  # Used for image upload
-  gem "cloudinary"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
