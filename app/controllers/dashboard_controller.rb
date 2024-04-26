@@ -1,6 +1,10 @@
-class AdminController < ApplicationController
+class DashboardController < ApplicationController
     before_action :authenticate_user!
     before_action :authorize_admin!
+
+    def index
+      
+    end
 
     def mass_message
       @drivers = User.where(role: 'driver')
@@ -13,7 +17,7 @@ class AdminController < ApplicationController
     private
 
     def authorize_admin!
-    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
+        redirect_to root_path, alert: "Not authorized" unless current_user.admin?
     end
   end
   

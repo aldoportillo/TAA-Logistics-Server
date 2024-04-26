@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     resources :images, only: [:create, :destroy]
   end
 
+
+  get 'dashboard', to: 'dashboard#index', as: 'admin_dashboard'
+  post 'dashboard/mass_message', to: 'dashboard#mass_message', as: 'mass_message_admin'
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
