@@ -8,6 +8,9 @@ gem "rails", "~> 7.1.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+# For formatting numbers
+gem 'phony_rails'
+
 # For loading env variables
 
 gem 'dotenv-rails'
