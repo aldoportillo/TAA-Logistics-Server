@@ -15,4 +15,8 @@ class User < ApplicationRecord
         def broker?
           role == 'broker'
         end
+
+        def driver?
+          role == 'driver'
+        end
 end
