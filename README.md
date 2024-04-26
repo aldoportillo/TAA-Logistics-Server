@@ -1,4 +1,4 @@
-# TAA Logistics Server
+# TAA Logistics Server and CRM
 
 ## Specifications
 
@@ -10,11 +10,11 @@ The TAA Logistics Server is a Ruby on Rails application designed to manage logis
 - Rails 6.0.0 or later
 - PostgreSQL 12.0 or later
 
-## Deployment Notes
+## Services
 
-Before deploying the TAA Logistics Server, please ensure the following:
-
-1. **SMTP Mailer**: Setup SMTP in production.rb
-2. **Cloudinary**: Setup 
-3. **Configure CSRF**: Make sure only the main domain can make requests to the API
-4. **Configure CORS**: Make sure to switch cors to the domain: # config/initializers/cors.rb
+| name | description | env | price |
+| ---  |   -----     | --- | ---   |
+| **POSTMARK** | Used for sending emails | POSTMARK_API_TOKEN, MAILER_EMAIL| $0-$15 |
+| **CLOUDINARY** | Used for image storage | CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET | free |
+| **RENDER** | Used for hosting | ADMIN_PASSWORD, CORS_ORIGIN | $12 |
+| **TWILIO** | Used for SMS | TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN | undefined |
