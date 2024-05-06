@@ -1,8 +1,8 @@
 class InquiryMailer < ApplicationMailer
-    default from: 'ed@taalogistics.com'
+    default from: ENV[MAILER_EMAIL]
   
     def new_inquiry_email(inquiry)
       @inquiry = inquiry
-      mail(to: 'ed@taalogistics.com', subject: 'New inquiry Received')
+      mail(to: ENV[MAILER_EMAIL], subject: 'New inquiry Received')
     end
 end

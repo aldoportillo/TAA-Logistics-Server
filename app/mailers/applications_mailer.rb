@@ -1,9 +1,9 @@
 class ApplicationsMailer < ApplicationMailer
-  default from: 'ed@taalogistics.com'
+  default from: ENV[MAILER_EMAIL]
 
   def new_application_email(application)
     @application = application
-    mail(to: 'ed@taalogistics.com', subject: 'New application Received')
+    mail(to: ENV[MAILER_EMAIL], subject: 'New application Received')
   end
 
 end

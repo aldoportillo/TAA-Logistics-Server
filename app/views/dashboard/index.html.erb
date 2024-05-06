@@ -1,0 +1,8 @@
+<h1>Welcome to the Dashboard</h1>
+<%= form_with url: mass_message_admin_path, method: :post, html: { class: "form-group" } do |form| %>
+    <div class="form-group">
+        <%= form.label :message, "Message to drivers:" %>
+        <%= form.text_area :message, rows: 3, class: "form-control" %>
+    </div>
+    <%= form.submit "Send Message", class: "btn btn-primary" %>
+<% end %>
