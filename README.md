@@ -73,3 +73,53 @@ Where SCH% is the surcharge based off the U.S. National Diesel Average. You can 
 4. Iterate through bids and add column for distance, tolls, LH, FSCH, and Price
 5. Store data for less API calls later on
 6. Return Updated CSV downloadable to return quotes
+
+#### Email Solution
+
+Install and Configure Outlook:
+
+Ensure Microsoft Outlook is installed on your client's computer.
+Configure Outlook with the client’s email account using the appropriate settings (IMAP/POP).
+Create a Local Archive Folder:
+
+Open Outlook.
+Go to File > Info > Tools > Clean Up Old Items.
+Select Archive this folder and all subfolders.
+Choose the main folder of the email account (usually the account name).
+Set a date to archive emails older than a specified time (e.g., emails older than 6 months).
+Choose a location on the local computer to save the archive file (.pst file).
+Click OK to start the archiving process.
+Accessing Archived Emails:
+
+To access the archived emails, go to File > Open & Export > Open Outlook Data File.
+Browse to the location where the .pst file was saved.
+Select the .pst file and click OK.
+The archived emails will appear in the Outlook folder list under a separate section (usually named "Archives" or the name of the .pst file).
+Managing Archived Emails:
+
+The archived emails can be accessed, searched, and managed just like regular emails in Outlook.
+The client can open, reply to, forward, and organize archived emails without affecting the storage space on the email server.
+Example Walkthrough
+Step 1: Install and Configure Outlook
+
+If not already done, download and install Microsoft Outlook.
+Set up the client's email account using IMAP (preferred for syncing) or POP (downloads emails and deletes from the server).
+Step 2: Create a Local Archive Folder
+
+Open Outlook and go to the File tab.
+Click Info, then Tools, and select Clean Up Old Items.
+Choose Archive this folder and all subfolders.
+Select the top-level folder of the email account.
+Choose a date to archive emails older than (e.g., emails older than 6 months).
+Specify the location to save the .pst file (e.g., C:\Users\[YourUsername]\Documents\Outlook Files\archive.pst).
+Click OK to start the archiving process.
+Step 3: Accessing Archived Emails
+
+In Outlook, go to File > Open & Export > Open Outlook Data File.
+Navigate to the location where the .pst file was saved and select it.
+Click OK. The archived emails will appear in the folder list, usually under a section labeled "Archives."
+Tips for Efficient Archiving
+Regular Archiving: Set a regular schedule for archiving (e.g., every 6 months) to keep the mailbox manageable.
+Backup Archives: Regularly back up the .pst files to an external drive or cloud storage to prevent data loss.
+Folder Organization: Maintain a consistent folder structure within the archive for easy navigation and retrieval.
+By following these steps, your client will have a seamless experience accessing their archived emails in Outlook without worrying about running out of email server storage.

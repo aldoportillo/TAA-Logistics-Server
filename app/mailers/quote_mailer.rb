@@ -6,4 +6,4 @@ class QuoteMailer < ApplicationMailer
       mail(to: ENV['MAILER_EMAIL'], subject: 'New Quote Received')
     end
   end
-  
+  nmnmm
