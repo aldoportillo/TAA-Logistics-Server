@@ -1,376 +1,461 @@
-<div id="<%= dom_id application %>" class="container">
+<div id="<%= dom_id(application) %>" class="container">
   <div class="row">
     <div class="col-md-6">
-      <h3>Personal Information</h3>
-      <hr>
-      <p>
-        <strong>First name:</strong>
-        <%= application.first_name %>
-      </p>
-
-      <p>
-        <strong>Middle initial:</strong>
-        <%= application.middle_initial %>
-      </p>
-
-      <p>
-        <strong>Last name:</strong>
-        <%= application.last_name %>
-      </p>
-
-      <p>
-        <strong>Address:</strong>
-        <%= application.address %>
-      </p>
-
-      <p>
-        <strong>City:</strong>
-        <%= application.city %>
-      </p>
-
-      <p>
-        <strong>State:</strong>
-        <%= application.state %>
-      </p>
-
-      <p>
-        <strong>Zip:</strong>
-        <%= application.zip %>
-      </p>
-
-      <p>
-        <strong>Birthday:</strong>
-        <%= application.birthday %>
-      </p>
-
-      <p>
-        <strong>Ssn:</strong>
-        <%= application.ssn %>
-      </p>
-
-      <p>
-        <strong>Phone number:</strong>
-        <%= application.phone_number %>
-      </p>
-
-      <p>
-        <strong>Email:</strong>
-        <%= application.email %>
-      </p>
+      <% if application.first_name.present? || application.middle_initial.present? || application.last_name.present? || application.address.present? || application.city.present? || application.state.present? || application.zip.present? || application.birthday.present? || application.ssn.present? || application.phone_number.present? || application.email.present? %>
+        <h3>Personal Information</h3>
+        <hr>
+        <% if application.first_name.present? %>
+          <p>
+            <strong>First name:</strong>
+            <%= application.first_name %>
+          </p>
+        <% end %>
+        <% if application.middle_initial.present? %>
+          <p>
+            <strong>Middle initial:</strong>
+            <%= application.middle_initial %>
+          </p>
+        <% end %>
+        <% if application.last_name.present? %>
+          <p>
+            <strong>Last name:</strong>
+            <%= application.last_name %>
+          </p>
+        <% end %>
+        <% if application.address.present? %>
+          <p>
+            <strong>Address:</strong>
+            <%= application.address %>
+          </p>
+        <% end %>
+        <% if application.city.present? %>
+          <p>
+            <strong>City:</strong>
+            <%= application.city %>
+          </p>
+        <% end %>
+        <% if application.state.present? %>
+          <p>
+            <strong>State:</strong>
+            <%= application.state %>
+          </p>
+        <% end %>
+        <% if application.zip.present? %>
+          <p>
+            <strong>Zip:</strong>
+            <%= application.zip %>
+          </p>
+        <% end %>
+        <% if application.birthday.present? %>
+          <p>
+            <strong>Birthday:</strong>
+            <%= application.birthday %>
+          </p>
+        <% end %>
+        <% if application.ssn.present? %>
+          <p>
+            <strong>Ssn:</strong>
+            <%= application.ssn %>
+          </p>
+        <% end %>
+        <% if application.phone_number.present? %>
+          <p>
+            <strong>Phone number:</strong>
+            <%= application.phone_number %>
+          </p>
+        <% end %>
+        <% if application.email.present? %>
+          <p>
+            <strong>Email:</strong>
+            <%= application.email %>
+          </p>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="col-md-6">
-      <h3>Residency Information</h3>
-      <hr>
-      <p>
-        <strong>Residency address 1:</strong>
-        <%= application.residency_address_1 %>
-      </p>
+      <% if application.residency_address_1.present? || application.residency_city_1.present? || application.residency_state_1.present? || application.residency_zip_1.present? || application.residency_address_2.present? || application.residency_city_2.present? || application.residency_state_2.present? || application.residency_zip_2.present? || application.residency_address_3.present? || application.residency_city_3.present? || application.residency_state_3.present? || application.residency_zip_3.present? %>
+        <h3>Residency Information</h3>
+        <hr>
+        <% if application.residency_address_1.present? %>
+          <p>
+            <strong>Residency address 1:</strong>
+            <%= application.residency_address_1 %>
+          </p>
+        <% end %>
+        <% if application.residency_city_1.present? %>
+          <p>
+            <strong>Residency city 1:</strong>
+            <%= application.residency_city_1 %>
+          </p>
+        <% end %>
+        <% if application.residency_state_1.present? %>
+          <p>
+            <strong>Residency state 1:</strong>
+            <%= application.residency_state_1 %>
+          </p>
+        <% end %>
+        <% if application.residency_zip_1.present? %>
+          <p>
+            <strong>Residency zip 1:</strong>
+            <%= application.residency_zip_1 %>
+          </p>
+        <% end %>
+        <% if application.residency_address_2.present? %>
+          <p>
+            <strong>Residency address 2:</strong>
+            <%= application.residency_address_2 %>
+          </p>
+        <% end %>
+        <% if application.residency_city_2.present? %>
+          <p>
+            <strong>Residency city 2:</strong>
+            <%= application.residency_city_2 %>
+          </p>
+        <% end %>
+        <% if application.residency_state_2.present? %>
+          <p>
+            <strong>Residency state 2:</strong>
+            <%= application.residency_state_2 %>
+          </p>
+        <% end %>
+        <% if application.residency_zip_2.present? %>
+          <p>
+            <strong>Residency zip 2:</strong>
+            <%= application.residency_zip_2 %>
+          </p>
+        <% end %>
+        <% if application.residency_address_3.present? %>
+          <p>
+            <strong>Residency address 3:</strong>
+            <%= application.residency_address_3 %>
+          </p>
+        <% end %>
+        <% if application.residency_city_3.present? %>
+          <p>
+            <strong>Residency city 3:</strong>
+            <%= application.residency_city_3 %>
+          </p>
+        <% end %>
+        <% if application.residency_state_3.present? %>
+          <p>
+            <strong>Residency state 3:</strong>
+            <%= application.residency_state_3 %>
+          </p>
+        <% end %>
+        <% if application.residency_zip_3.present? %>
+          <p>
+            <strong>Residency zip 3:</strong>
+            <%= application.residency_zip_3 %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <% if application.license_state.present? || application.license_number.present? || application.license_type.present? || application.license_expiration_date.present? %>
+        <h3>License Information</h3>
+        <hr>
+        <% if application.license_state.present? %>
+          <p>
+            <strong>License state:</strong>
+            <%= application.license_state %>
+          </p>
+        <% end %>
+        <% if application.license_number.present? %>
+          <p>
+            <strong>License number:</strong>
+            <%= application.license_number %>
+          </p>
+        <% end %>
+        <% if application.license_type.present? %>
+          <p>
+            <strong>License type:</strong>
+            <%= application.license_type %>
+          </p>
+        <% end %>
+        <% if application.license_expiration_date.present? %>
+          <p>
+            <strong>License expiration date:</strong>
+            <%= application.license_expiration_date %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
 
-      <p>
-        <strong>Residency city 1:</strong>
-        <%= application.residency_city_1 %>
-      </p>
-
-      <p>
-        <strong>Residency state 1:</strong>
-        <%= application.residency_state_1 %>
-      </p>
-
-      <p>
-        <strong>Residency zip 1:</strong>
-        <%= application.residency_zip_1 %>
-      </p>
-
-      <p>
-        <strong>Residency address 2:</strong>
-        <%= application.residency_address_2 %>
-      </p>
-
-      <p>
-        <strong>Residency city 2:</strong>
-        <%= application.residency_city_2 %>
-      </p>
-
-      <p>
-        <strong>Residency state 2:</strong>
-        <%= application.residency_state_2 %>
-      </p>
-
-      <p>
-        <strong>Residency zip 2:</strong>
-        <%= application.residency_zip_2 %>
-      </p>
-
-      <p>
-        <strong>Residency address 3:</strong>
-        <%= application.residency_address_3 %>
-      </p>
-
-      <p>
-        <strong>Residency city 3:</strong>
-        <%= application.residency_city_3 %>
-      </p>
-
-      <p>
-        <strong>Residency state 3:</strong>
-        <%= application.residency_state_3 %>
-      </p>
-
-      <p>
-        <strong>Residency zip 3:</strong>
-        <%= application.residency_zip_3 %>
-      </p>
+    <div class="col-md-6">
+      <% if application.conviction_date_1.present? || application.conviction_violation_1.present? || application.conviction_state_1.present? || application.conviction_penalty_1.present? || application.conviction_date_2.present? || application.conviction_violation_2.present? || application.conviction_state_2.present? || application.conviction_penalty_2.present? || application.conviction_date_3.present? || application.conviction_violation_3.present? || application.conviction_state_3.present? || application.conviction_penalty_3.present? %>
+        <h3>Conviction Information</h3>
+        <hr>
+        <% if application.conviction_date_1.present? %>
+          <p>
+            <strong>Conviction date 1:</strong>
+            <%= application.conviction_date_1 %>
+          </p>
+        <% end %>
+        <% if application.conviction_violation_1.present? %>
+          <p>
+            <strong>Conviction violation 1:</strong>
+            <%= application.conviction_violation_1 %>
+          </p>
+        <% end %>
+        <% if application.conviction_state_1.present? %>
+          <p>
+            <strong>Conviction state 1:</strong>
+            <%= application.conviction_state_1 %>
+          </p>
+        <% end %>
+        <% if application.conviction_penalty_1.present? %>
+          <p>
+            <strong>Conviction penalty 1:</strong>
+            <%= application.conviction_penalty_1 %>
+          </p>
+        <% end %>
+        <% if application.conviction_date_2.present? %>
+          <p>
+            <strong>Conviction date 2:</strong>
+            <%= application.conviction_date_2 %>
+          </p>
+        <% end %>
+        <% if application.conviction_violation_2.present? %>
+          <p>
+            <strong>Conviction violation 2:</strong>
+            <%= application.conviction_violation_2 %>
+          </p>
+        <% end %>
+        <% if application.conviction_state_2.present? %>
+          <p>
+            <strong>Conviction state 2:</strong>
+            <%= application.conviction_state_2 %>
+          </p>
+        <% end %>
+        <% if application.conviction_penalty_2.present? %>
+          <p>
+            <strong>Conviction penalty 2:</strong>
+            <%= application.conviction_penalty_2 %>
+          </p>
+        <% end %>
+        <% if application.conviction_date_3.present? %>
+          <p>
+            <strong>Conviction date 3:</strong>
+            <%= application.conviction_date_3 %>
+          </p>
+        <% end %>
+        <% if application.conviction_violation_3.present? %>
+          <p>
+            <strong>Conviction violation 3:</strong>
+            <%= application.conviction_violation_3 %>
+          </p>
+        <% end %>
+        <% if application.conviction_state_3.present? %>
+          <p>
+            <strong>Conviction state 3:</strong>
+            <%= application.conviction_state_3 %>
+          </p>
+        <% end %>
+        <% if application.conviction_penalty_3.present? %>
+          <p>
+            <strong>Conviction penalty 3:</strong>
+            <%= application.conviction_penalty_3 %>
+          </p>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6">
-      <h3>License Information</h3>
-      <hr>
-      <p>
-        <strong>License state:</strong>
-        <%= application.license_state %>
-      </p>
-
-      <p>
-        <strong>License number:</strong>
-        <%= application.license_number %>
-      </p>
-
-      <p>
-        <strong>License type:</strong>
-        <%= application.license_type %>
-      </p>
-
-      <p>
-        <strong>License expiration date:</strong>
-        <%= application.license_expiration_date %>
-      </p>
+      <% if application.experience_class_1.present? || application.experience_type_1.present? || application.experience_start_date_1.present? || application.experience_end_date_1.present? || application.experience_miles_1.present? || application.experience_class_2.present? || application.experience_type_2.present? || application.experience_start_date_2.present? || application.experience_end_date_2.present? || application.experience_miles_2.present? || application.experience_class_3.present? || application.experience_type_3.present? || application.experience_start_date_3.present? || application.experience_end_date_3.present? || application.experience_miles_3.present? %>
+        <h3>Experience Information</h3>
+        <hr>
+        <% if application.experience_class_1.present? %>
+          <p>
+            <strong>Experience class 1:</strong>
+            <%= application.experience_class_1 %>
+          </p>
+        <% end %>
+        <% if application.experience_type_1.present? %>
+          <p>
+            <strong>Experience type 1:</strong>
+            <%= application.experience_type_1 %>
+          </p>
+        <% end %>
+        <% if application.experience_start_date_1.present? %>
+          <p>
+            <strong>Experience start date 1:</strong>
+            <%= application.experience_start_date_1 %>
+          </p>
+        <% end %>
+        <% if application.experience_end_date_1.present? %>
+          <p>
+            <strong>Experience end date 1:</strong>
+            <%= application.experience_end_date_1 %>
+          </p>
+        <% end %>
+        <% if application.experience_miles_1.present? %>
+          <p>
+            <strong>Experience miles 1:</strong>
+            <%= application.experience_miles_1 %>
+          </p>
+        <% end %>
+        <% if application.experience_class_2.present? %>
+          <p>
+            <strong>Experience class 2:</strong>
+            <%= application.experience_class_2 %>
+          </p>
+        <% end %>
+        <% if application.experience_type_2.present? %>
+          <p>
+            <strong>Experience type 2:</strong>
+            <%= application.experience_type_2 %>
+          </p>
+        <% end %>
+        <% if application.experience_start_date_2.present? %>
+          <p>
+            <strong>Experience start date 2:</strong>
+            <%= application.experience_start_date_2 %>
+          </p>
+        <% end %>
+        <% if application.experience_end_date_2.present? %>
+          <p>
+            <strong>Experience end date 2:</strong>
+            <%= application.experience_end_date_2 %>
+          </p>
+        <% end %>
+        <% if application.experience_miles_2.present? %>
+          <p>
+            <strong>Experience miles 2:</strong>
+            <%= application.experience_miles_2 %>
+          </p>
+        <% end %>
+        <% if application.experience_class_3.present? %>
+          <p>
+            <strong>Experience class 3:</strong>
+            <%= application.experience_class_3 %>
+          </p>
+        <% end %>
+        <% if application.experience_type_3.present? %>
+          <p>
+            <strong>Experience type 3:</strong>
+            <%= application.experience_type_3 %>
+          </p>
+        <% end %>
+        <% if application.experience_start_date_3.present? %>
+          <p>
+            <strong>Experience start date 3:</strong>
+            <%= application.experience_start_date_3 %>
+          </p>
+        <% end %>
+        <% if application.experience_end_date_3.present? %>
+          <p>
+            <strong>Experience end date 3:</strong>
+            <%= application.experience_end_date_3 %>
+          </p>
+        <% end %>
+        <% if application.experience_miles_3.present? %>
+          <p>
+            <strong>Experience miles 3:</strong>
+            <%= application.experience_miles_3 %>
+          </p>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="col-md-6">
-      <h3>Conviction Information</h3>
-      <hr>
-      <p>
-        <strong>Conviction date 1:</strong>
-        <%= application.conviction_date_1 %>
-      </p>
-
-      <p>
-        <strong>Conviction violation 1:</strong>
-        <%= application.conviction_violation_1 %>
-      </p>
-
-      <p>
-        <strong>Conviction state 1:</strong>
-        <%= application.conviction_state_1 %>
-      </p>
-
-      <p>
-        <strong>Conviction penalty 1:</strong>
-        <%= application.conviction_penalty_1 %>
-      </p>
-
-      <p>
-        <strong>Conviction date 2:</strong>
-        <%= application.conviction_date_2 %>
-      </p>
-
-      <p>
-        <strong>Conviction violation 2:</strong>
-        <%= application.conviction_violation_2 %>
-      </p>
-
-      <p>
-        <strong>Conviction state 2:</strong>
-        <%= application.conviction_state_2 %>
-      </p>
-
-      <p>
-        <strong>Conviction penalty 2:</strong>
-        <%= application.conviction_penalty_2 %>
-      </p>
-
-      <p>
-        <strong>Conviction date 3:</strong>
-        <%= application.conviction_date_3 %>
-      </p>
-
-      <p>
-        <strong>Conviction violation 3:</strong>
-        <%= application.conviction_violation_3 %>
-      </p>
-
-      <p>
-        <strong>Conviction state 3:</strong>
-        <%= application.conviction_state_3 %>
-      </p>
-
-      <p>
-        <strong>Conviction penalty 3:</strong>
-        <%= application.conviction_penalty_3 %>
-      </p>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6">
-      <h3>Experience Information</h3>
-      <hr>
-      <p>
-        <strong>Experience class 1:</strong>
-        <%= application.experience_class_1 %>
-      </p>
-
-      <p>
-        <strong>Experience type 1:</strong>
-        <%= application.experience_type_1 %>
-      </p>
-
-      <p>
-        <strong>Experience start date 1:</strong>
-        <%= application.experience_start_date_1 %>
-      </p>
-
-      <p>
-        <strong>Experience end date 1:</strong>
-        <%= application.experience_end_date_1 %>
-      </p>
-
-      <p>
-        <strong>Experience miles 1:</strong>
-        <%= application.experience_miles_1 %>
-      </p>
-
-      <p>
-        <strong>Experience class 2:</strong>
-        <%= application.experience_class_2 %>
-      </p>
-
-      <p>
-        <strong>Experience type 2:</strong>
-        <%= application.experience_type_2 %>
-      </p>
-
-      <p>
-        <strong>Experience start date 2:</strong>
-        <%= application.experience_start_date_2 %>
-      </p>
-
-      <p>
-        <strong>Experience end date 2:</strong>
-        <%= application.experience_end_date_2 %>
-      </p>
-
-      <p>
-        <strong>Experience miles 2:</strong>
-        <%= application.experience_miles_2 %>
-      </p>
-
-      <p>
-        <strong>Experience class 3:</strong>
-        <%= application.experience_class_3 %>
-      </p>
-
-      <p>
-        <strong>Experience type 3:</strong>
-        <%= application.experience_type_3 %>
-      </p>
-
-      <p>
-        <strong>Experience start date 3:</strong>
-        <%= application.experience_start_date_3 %>
-      </p>
-
-      <p>
-        <strong>Experience end date 3:</strong>
-        <%= application.experience_end_date_3 %>
-      </p>
-
-      <p>
-        <strong>Experience miles 3:</strong>
-        <%= application.experience_miles_3 %>
-      </p>
-    </div>
-
-    <div class="col-md-6">
+      <% if application.accident_date_1.present? || application.accident_nature_1.present? || application.accident_fatalities_1.present? || application.accident_injuries_1.present? || application.accident_spill_1.present? || application.accident_date_2.present? || application.accident_nature_2.present? || application.accident_fatalities_2.present? || application.accident_injuries_2.present? || application.accident_spill_2.present? || application.accident_date_3.present? || application.accident_nature_3.present? || application.accident_fatalities_3.present? || application.accident_injuries_3.present? || application.accident_spill_3.present? %>
       <h3>Accident Information</h3>
       <hr>
-      <p>
-        <strong>Accident date 1:</strong>
-        <%= application.accident_date_1 %>
-      </p>
-
-      <p>
-        <strong>Accident nature 1:</strong>
-        <%= application.accident_nature_1 %>
-      </p>
-
-      <p>
-        <strong>Accident fatalities 1:</strong>
-        <%= application.accident_fatalities_1 %>
-      </p>
-
-      <p>
-        <strong>Accident injuries 1:</strong>
-        <%= application.accident_injuries_1 %>
-      </p>
-
-      <p>
-        <strong>Accident spill 1:</strong>
-        <%= application.accident_spill_1 %>
-      </p>
-
-      <p>
-        <strong>Accident date 2:</strong>
-        <%= application.accident_date_2 %>
-      </p>
-
-      <p>
-        <strong>Accident nature 2:</strong>
-        <%= application.accident_nature_2 %>
-      </p>
-
-      <p>
-        <strong>Accident fatalities 2:</strong>
-        <%= application.accident_fatalities_2 %>
-      </p>
-
-      <p>
-        <strong>Accident injuries 2:</strong>
-        <%= application.accident_injuries_2 %>
-      </p>
-
-      <p>
-        <strong>Accident spill 2:</strong>
-        <%= application.accident_spill_2 %>
-      </p>
-
-      <p>
-        <strong>Accident date 3:</strong>
-        <%= application.accident_date_3 %>
-      </p>
-
-      <p>
-        <strong>Accident nature 3:</strong>
-        <%= application.accident_nature_3 %>
-      </p>
-
-      <p>
-        <strong>Accident fatalities 3:</strong>
-        <%= application.accident_fatalities_3 %>
-      </p>
-
-      <p>
-        <strong>Accident injuries 3:</strong>
-        <%= application.accident_injuries_3 %>
-      </p>
-
-      <p>
-        <strong>Accident spill 3:</strong>
-        <%= application.accident_spill_3 %>
-      </p>
-    </div>
+      <% if application.accident_date_1.present? %>
+        <p>
+          <strong>Accident date 1:</strong>
+          <%= application.accident_date_1 %>
+        </p>
+      <% end %>
+      <% if application.accident_nature_1.present? %>
+        <p>
+          <strong>Accident nature 1:</strong>
+          <%= application.accident_nature_1 %>
+        </p>
+      <% end %>
+      <% if application.accident_fatalities_1.present? %>
+        <p>
+          <strong>Accident fatalities 1:</strong>
+          <%= application.accident_fatalities_1 %>
+        </p>
+      <% end %>
+      <% if application.accident_injuries_1.present? %>
+        <p>
+          <strong>Accident injuries 1:</strong>
+          <%= application.accident_injuries_1 %>
+        </p>
+      <% end %>
+      <% if application.accident_spill_1.present? %>
+        <p>
+          <strong>Accident spill 1:</strong>
+          <%= application.accident_spill_1 %>
+        </p>
+      <% end %>
+      <% if application.accident_date_2.present? %>
+        <p>
+          <strong>Accident date 2:</strong>
+          <%= application.accident_date_2 %>
+        </p>
+      <% end %>
+      <% if application.accident_nature_2.present? %>
+        <p>
+          <strong>Accident nature 2:</strong>
+          <%= application.accident_nature_2 %>
+        </p>
+      <% end %>
+      <% if application.accident_fatalities_2.present? %>
+        <p>
+          <strong>Accident fatalities 2:</strong>
+          <%= application.accident_fatalities_2 %>
+        </p>
+      <% end %>
+      <% if application.accident_injuries_2.present? %>
+        <p>
+          <strong>Accident injuries 2:</strong>
+          <%= application.accident_injuries_2 %>
+        </p>
+      <% end %>
+      <% if application.accident_spill_2.present? %>
+        <p>
+          <strong>Accident spill 2:</strong>
+          <%= application.accident_spill_2 %>
+        </p>
+      <% end %>
+      <% if application.accident_date_3.present? %>
+        <p>
+          <strong>Accident date 3:</strong>
+          <%= application.accident_date_3 %>
+        </p>
+      <% end %>
+      <% if application.accident_nature_3.present? %>
+        <p>
+          <strong>Accident nature 3:</strong>
+          <%= application.accident_nature_3 %>
+        </p>
+      <% end %>
+      <% if application.accident_fatalities_3.present? %>
+        <p>
+          <strong>Accident fatalities 3:</strong>
+          <%= application.accident_fatalities_3 %>
+        </p>
+      <% end %>
+      <% if application.accident_injuries_3.present? %>
+        <p>
+          <strong>Accident injuries 3:</strong>
+          <%= application.accident_injuries_3 %>
+        </p>
+      <% end %>
+      <% if application.accident_spill_3.present? %>
+        <p>
+          <strong>Accident spill 3:</strong>
+          <%= application.accident_spill_3 %>
+        </p>
+      <% end %>
+    <% end %>
   </div>
 </div>

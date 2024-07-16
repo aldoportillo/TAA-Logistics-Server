@@ -14,6 +14,15 @@ class DashboardController < ApplicationController
       redirect_to admin_dashboard_path, notice: "Messages sent successfully to all drivers."
     end
 
+    def mass_message
+      message = params[:message]
+      drivers = User.where(role: 'driver').pluck(:phone_number)
+  
+      SendBulkSmsJob.perform_async(message, drivers)
+  
+      redirect_to admin_dashboard_path, notice: 'Messages are being sent to all drivers.'
+    end
+
     private
 
     def authorize_admin!
