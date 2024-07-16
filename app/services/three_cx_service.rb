@@ -4,7 +4,7 @@ class ThreeCxService
   
     def initialize
       @headers = {
-        "Authorization" => "Bearer #{ENV['3CX_API_KEY']}",
+        "Authorization" => "Bearer #{ENV['THREE_CX_API_KEY']}",
         "Content-Type" => "application/json"
       }
     end
