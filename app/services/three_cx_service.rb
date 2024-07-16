@@ -1,4 +1,3 @@
-# app/services/three_cx_service.rb
 class ThreeCxService
     include HTTParty
     base_uri 'https://api.3cx.com'
