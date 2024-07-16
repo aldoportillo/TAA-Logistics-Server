@@ -8,6 +8,12 @@ gem "rails", "~> 7.1.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
+# For making HTTP requests
+gem 'httparty'
+
+# For background jobs
+gem 'sidekiq'
+
 # For formatting numbers
 gem 'phony_rails'
 
