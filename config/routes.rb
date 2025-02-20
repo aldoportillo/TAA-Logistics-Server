@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :bids
   resources :inquiries
   resources :applications
   resources :quotes
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :employees, controller: 'employees'
+  
+  post 'bids/upload_csv', to: 'bids#upload_csv' # New route for file uploads
+  
 
   # Defines the root path route ("/")
   
