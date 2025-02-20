@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  phony_normalize :phone_number, default_country_code: 'US'
-  validates :phone_number, phony_plausible: true, presence: true
+  validates :phone_number, presence: true
 
   # Check user roles
   def admin?
