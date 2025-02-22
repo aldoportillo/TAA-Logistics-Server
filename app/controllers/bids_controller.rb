@@ -19,14 +19,11 @@ class BidsController < ApplicationController
       return
     end
 
-    # Save uploaded file temporarily
     file_path = Rails.root.join('tmp', uploaded_file.original_filename)
     File.open(file_path, 'wb') { |file| file.write(uploaded_file.read) }
 
-    # Process CSV and get results
-    results_path = ProcessCsvJob.perform_now(file_path)
+    results_path = ProcessCsvJob.perform_now(file_path, params.to_unsafe_h)
 
-    # Send processed CSV file to the user
     send_file results_path, type: 'text/csv', filename: "processed_bids.csv"
   end
 

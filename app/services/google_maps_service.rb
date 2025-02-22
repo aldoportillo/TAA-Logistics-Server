@@ -34,9 +34,9 @@ class GoogleMapsService
 
       if data['status'] == 'OK'
         route = data['routes'].first['legs']
-        total_distance = route.sum { |leg| leg['distance']['value'] } / 1609.34 # Convert meters to miles
-        formatted_distance = "#{total_distance.round(2)} mi"
-        @distance_cache[cache_key] = { distance: formatted_distance } # Store in cache
+        total_distance = route.sum { |leg| leg['distance']['value'] } / 1609.34
+        formatted_distance = "#{total_distance.round(4)}"
+        @distance_cache[cache_key] = { distance: formatted_distance }
         pp "Total Distance: #{formatted_distance}"
         return { distance: formatted_distance }
       else
