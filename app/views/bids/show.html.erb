@@ -1,10 +1,31 @@
 <p style="color: green"><%= notice %></p>
-
-<%= render @bid %>
-
-<div>
-  <%= link_to "Edit this bid", edit_bid_path(@bid) %> |
-  <%= link_to "Back to bids", bids_path %>
-
-  <%= button_to "Destroy this bid", @bid, method: :delete %>
-</div>
+<% if params[:id] == 'processed' %>
+  <h2>Processed CSV Preview</h2>
+  <% if @csv_data.present? %>
+    <table>
+      <thead>
+        <tr>
+          <% @csv_data.headers.each do |header| %>
+            <th><%= header %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @csv_data.each do |row| %>
+          <tr>
+            <% row.each do |field, value| %>
+              <td><%= value %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No data available.</p>
+  <% end %>
+  <%= link_to "Download Processed CSV", download_processed_bids_path, class: "btn btn-primary" %>
+<% else %>
+  <!-- Regular show view for a Bid -->
+  <h2>Bid Details</h2>
+  <p><%= @bid.inspect %></p>
+<% end %>
