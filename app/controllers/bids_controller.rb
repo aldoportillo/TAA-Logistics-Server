@@ -16,32 +16,36 @@ class BidsController < ApplicationController
     if uploaded_file.blank?
       redirect_to bids_path, alert: "Please upload a CSV file." and return
     end
-
-    # Save uploaded file to tmp
+  
     file_path = Rails.root.join('tmp', uploaded_file.original_filename)
     File.open(file_path, 'wb') { |file| file.write(uploaded_file.read) }
-
-    # Process the CSV file (this could be a synchronous call or a background job)
-    results_path = ProcessCsvJob.perform_now(file_path, params.to_unsafe_h)
-
+  
+    timestamp = params[:timestamp].presence || Time.current.iso8601
+    results_path = ProcessCsvJob.perform_now(file_path, params.to_unsafe_h.merge(timestamp: timestamp))
+  
     if File.exist?(results_path)
-      redirect_to bid_path(id: 'processed'), notice: "CSV processed successfully."
+      processed_filename = File.basename(results_path)
+      redirect_to bid_path(id: 'processed', filename: processed_filename), notice: "CSV processed successfully."
     else
       redirect_to bids_path, alert: "There was an issue processing the CSV file."
     end
   end
 
   # GET /bids/:id
-  # This action serves a dual purpose:
   def show
     if params[:id] == 'processed'
-      csv_file = Rails.root.join('tmp', "processed_bids.csv")
-      if File.exist?(csv_file)
-        # Read CSV data (adjust as needed if the CSV is very large)
-        @csv_data = CSV.read(csv_file, headers: true)
-      else
-        redirect_to bids_path, alert: "Processed CSV not found." and return
+      if params[:filename].blank?
+        raise "Missing filename parameter for processed CSV!"
       end
+  
+      processed_filename = params[:filename]
+      csv_file = Rails.root.join('tmp', processed_filename)
+      unless File.exist?(csv_file)
+        raise "Processed CSV file not found for filename: #{processed_filename}"
+      end
+  
+      @csv_data = CSV.read(csv_file, headers: true)
+      @processed_filename = processed_filename
     else
       @bid = Bid.find(params[:id])
     end
@@ -49,11 +53,16 @@ class BidsController < ApplicationController
 
   # GET /bids/download_processed_bids
   def download_processed
-    file_path = Rails.root.join('tmp', "processed_bids.csv")
+    if params[:filename].blank?
+      raise "Missing filename parameter for download!"
+    end
+  
+    processed_filename = params[:filename]
+    file_path = Rails.root.join('tmp', processed_filename)
     if File.exist?(file_path)
-      send_file file_path, type: 'text/csv', filename: "processed_bids.csv", disposition: 'attachment'
+      send_file file_path, type: 'text/csv', filename: processed_filename, disposition: 'attachment'
     else
-      redirect_to bids_path, alert: "Processed file not found."
+      raise "Processed file not found for filename: #{processed_filename}"
     end
   end
 

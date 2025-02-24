@@ -1,12 +1,15 @@
-<p style="color: green"><%= notice %></p>
+<% if notice.present? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+
 <% if params[:id] == 'processed' %>
   <h2>Processed CSV Preview</h2>
   <% if @csv_data.present? %>
-    <table>
-      <thead>
+    <table class="table table-striped table-hover">
+      <thead class="thead-dark">
         <tr>
           <% @csv_data.headers.each do |header| %>
-            <th><%= header %></th>
+            <th scope="col"><%= header %></th>
           <% end %>
         </tr>
       </thead>
@@ -21,11 +24,14 @@
       </tbody>
     </table>
   <% else %>
-    <p>No data available.</p>
+    <div class="alert alert-warning">No data available.</div>
   <% end %>
-  <%= link_to "Download Processed CSV", download_processed_bids_path, class: "btn btn-primary" %>
+  <%= link_to "Download Processed CSV", download_processed_bids_path(filename: @processed_filename), class: "btn btn-primary" %>
 <% else %>
-  <!-- Regular show view for a Bid -->
   <h2>Bid Details</h2>
-  <p><%= @bid.inspect %></p>
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text"><%= @bid.inspect %></p>
+    </div>
+  </div>
 <% end %>

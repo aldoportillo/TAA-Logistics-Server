@@ -32,7 +32,6 @@ class ProcessCsvJob < ApplicationJob
 
     csv_data.each_with_index do |row, i|
       ramp_address = google_maps.get_ramp_address(row[:ramp_port_location])
-
       consignee_location = google_maps.validate_location(row[:consignee_shipper_city], row[:consignee_shipper_state])
 
       trip_stops = [
@@ -47,15 +46,27 @@ class ProcessCsvJob < ApplicationJob
       distance_result = google_maps.fetch_distance(trip_stops)
 
       results << {
-        "Ramp/Port Location" => row[:ramp_port_location],
+        "Ramp/Port Location"     => row[:ramp_port_location],
         "Consignee/Shipper City" => row[:consignee_shipper_city],
-        "Consignee/Shipper State" => row[:consignee_shipper_state],
-        "LH + FSCH" => calculate_linehaul_plus_fuelsurcharge(distance_result[:distance], params[:rate_per_mile], params[:fuel_surcharge]),
-        "Distance (mi)" => distance_result[:distance]
+        "Consignee/Shipper State"=> row[:consignee_shipper_state],
+        "LH + FSCH"              => calculate_linehaul_plus_fuelsurcharge(
+                                      distance_result[:distance],
+                                      params[:rate_per_mile],
+                                      params[:fuel_surcharge]
+                                    ),
+        "Distance (mi)"          => distance_result[:distance]
       }
     end
 
-    new_csv_path = Rails.root.join('tmp', "#{Time.now}_processed_bids.csv")
+    # Use the provided timestamp for the filename, or default to current time.
+    timestamp = if params[:timestamp].present?
+                  Time.parse(params[:timestamp]).strftime("%Y%m%d%H%M%S")
+                else
+                  Time.current.strftime("%Y%m%d%H%M%S")
+                end
+
+    new_csv_filename = "#{timestamp}_processed_bids.csv"
+    new_csv_path = Rails.root.join('tmp', new_csv_filename)
     headers = results.first.keys
 
     CSV.open(new_csv_path, 'w', write_headers: true, headers: headers) do |csv|
