@@ -1,6 +1,6 @@
 <h2>Upload CSV for Processing</h2>
 
-<%= form_with url: bids_upload_csv_path, local: true, multipart: true do |form| %>
+<%= form_with url: upload_csv_bids_path, local: true, multipart: true do |form| %>
   <div>
     <%= form.label :rate_per_mile, "Rate Per Mile $"%>
     <%= form.text_field :rate_per_mile %>

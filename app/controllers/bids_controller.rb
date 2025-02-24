@@ -1,7 +1,7 @@
 class BidsController < ApplicationController
-  before_action :set_bid, only: %i[ show edit destroy ]
+  before_action :set_bid, only: %i[show edit destroy]
 
-  # GET /bids or /bids.json
+  # GET /bids
   def index
     @bids = Bid.all
   end
@@ -10,24 +10,54 @@ class BidsController < ApplicationController
   def new
   end
 
-  # POST /bids/upload (Handles CSV Upload)
+  # POST /bids/upload
   def upload_csv
     uploaded_file = params[:file]
-
     if uploaded_file.blank?
-      redirect_to bids_path, alert: "Please upload a CSV file."
-      return
+      redirect_to bids_path, alert: "Please upload a CSV file." and return
     end
 
+    # Save uploaded file to tmp
     file_path = Rails.root.join('tmp', uploaded_file.original_filename)
     File.open(file_path, 'wb') { |file| file.write(uploaded_file.read) }
 
+    # Process the CSV file (this could be a synchronous call or a background job)
     results_path = ProcessCsvJob.perform_now(file_path, params.to_unsafe_h)
 
-    send_file results_path, type: 'text/csv', filename: "processed_bids.csv"
+    if File.exist?(results_path)
+      redirect_to bid_path(id: 'processed'), notice: "CSV processed successfully."
+    else
+      redirect_to bids_path, alert: "There was an issue processing the CSV file."
+    end
   end
 
-  # DELETE /bids/1 or /bids/1.json
+  # GET /bids/:id
+  # This action serves a dual purpose:
+  def show
+    if params[:id] == 'processed'
+      csv_file = Rails.root.join('tmp', "processed_bids.csv")
+      if File.exist?(csv_file)
+        # Read CSV data (adjust as needed if the CSV is very large)
+        @csv_data = CSV.read(csv_file, headers: true)
+      else
+        redirect_to bids_path, alert: "Processed CSV not found." and return
+      end
+    else
+      @bid = Bid.find(params[:id])
+    end
+  end
+
+  # GET /bids/download_processed_bids
+  def download_processed
+    file_path = Rails.root.join('tmp', "processed_bids.csv")
+    if File.exist?(file_path)
+      send_file file_path, type: 'text/csv', filename: "processed_bids.csv", disposition: 'attachment'
+    else
+      redirect_to bids_path, alert: "Processed file not found."
+    end
+  end
+
+  # DELETE /bids/1
   def destroy
     @bid.destroy!
     respond_to do |format|
@@ -39,6 +69,8 @@ class BidsController < ApplicationController
   private
 
     def set_bid
-      @bid = Bid.find(params[:id])
+      unless params[:id] == 'processed'
+        @bid = Bid.find(params[:id])
+      end
     end
 end

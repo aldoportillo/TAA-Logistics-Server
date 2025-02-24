@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :bids
   resources :inquiries
   resources :applications
   resources :quotes
@@ -22,8 +21,12 @@ Rails.application.routes.draw do
 
   resources :employees, controller: 'employees'
   
-  post 'bids/upload_csv', to: 'bids#upload_csv' # New route for file uploads
-  
+  resources :bids do
+    collection do
+      post :upload_csv
+      get  :download_processed
+    end
+  end
 
   # Defines the root path route ("/")
   
