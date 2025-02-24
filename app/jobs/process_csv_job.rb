@@ -58,7 +58,6 @@ class ProcessCsvJob < ApplicationJob
       }
     end
 
-    # Use the provided timestamp for the filename, or default to current time.
     timestamp = if params[:timestamp].present?
                   Time.parse(params[:timestamp]).strftime("%Y%m%d%H%M%S")
                 else
