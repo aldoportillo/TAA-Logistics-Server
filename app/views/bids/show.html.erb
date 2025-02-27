@@ -3,7 +3,10 @@
 <% end %>
 
 <% if params[:id] == 'processed' %>
-  <h2>Processed CSV Preview</h2>
+  <div class="d-flex justify-content-between align-items-center m-3">
+    <h2>Processed CSV Preview</h2>
+    <%= link_to "Download Processed CSV", download_processed_bids_path(filename: @processed_filename), class: "btn btn-primary" %>
+  </div>
   <% if @csv_data.present? %>
     <table class="table table-striped table-hover">
       <thead class="thead-dark">
@@ -26,7 +29,6 @@
   <% else %>
     <div class="alert alert-warning">No data available.</div>
   <% end %>
-  <%= link_to "Download Processed CSV", download_processed_bids_path(filename: @processed_filename), class: "btn btn-primary" %>
 <% else %>
   <h2>Bid Details</h2>
   <div class="card">
