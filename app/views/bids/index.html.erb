@@ -1,19 +1,23 @@
 <h2>Upload CSV for Processing</h2>
 
-<%= form_with url: upload_csv_bids_path, local: true, multipart: true do |form| %>
-  <div>
-    <%= form.label :rate_per_mile, "Rate Per Mile $"%>
-    <%= form.text_field :rate_per_mile %>
-  </div>
-  <div>
-    <%= form.label :fuel_surcharge, "Fuel Surcharge %"%>
-    <%= form.text_field :fuel_surcharge %>
-  </div>
-  <div>
-    <%= form.label :file, "Select CSV file" %>
-    <%= form.file_field :file %>
-  </div>
-  <div>
-    <%= form.submit "Upload and Process" %>
-  </div>
-<% end %>
+<div class="p-4">
+  <%= form_with url: upload_csv_bids_path, local: true, html: { multipart: true } do |form| %>
+    <div class="mb-3">
+      <%= form.label :rate_per_mile, "Rate Per Mile $", class: "form-label" %>
+      <%= form.text_field :rate_per_mile, class: "form-control" %>
+      <p class="form-text text-muted">Enter the rate per mile in dollars excluding FSCH. This includes round trip.</p>
+    </div>
+    <div class="mb-3">
+      <%= form.label :fuel_surcharge, "Fuel Surcharge %", class: "form-label" %>
+      <%= form.text_field :fuel_surcharge, class: "form-control" %>
+      <p class="form-text text-muted">Enter the fuel surcharge in percentage. This is the percentage of the rate per mile if you wish to implement it.</p>
+    </div>
+    <div class="mb-3">
+      <%= form.label :file, "Select CSV file", class: "form-label" %>
+      <%= form.file_field :file, class: "form-control" %>
+    </div>
+    <div>
+      <%= form.submit "Upload and Process", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
