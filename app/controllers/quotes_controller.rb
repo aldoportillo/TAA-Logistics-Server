@@ -37,7 +37,17 @@ class QuotesController < ApplicationController
 
   # POST /quotes or /quotes.json
   def create
+
     @quote = Quote.new(quote_params)
+
+    if quote_params[:destination].present?
+      total = quote_total(quote_params[:destination], quote_params[:rate_per_mile].to_f, quote_params[:fsch_percent].to_f)
+
+      @quote.miles = total[:miles]
+      @quote.line_haul = total[:line_haul]
+      @quote.fuel_surcharge = total[:fuel_surcharge]
+      @quote.total = total[:total]
+    end
 
     respond_to do |format|
       if @quote.save
@@ -82,6 +92,25 @@ class QuotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quote_params
-      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes, :contacted)
+      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes, :contacted, :destination, :rate_per_mile, :fsch_percent, :miles, :line_haul, :fuel_surcharge, :total)
+    end
+
+    def quote_total(destination, rate, fsch_percent)
+      google_maps = GoogleMapsService.new
+
+      debugger
+      trip_stops = [
+        "18949 Wolf Rd, Mokena, IL 60448",
+        destination,
+        "18949 Wolf Rd, Mokena, IL 60448"
+      ]
+
+      miles = google_maps.fetch_distance(trip_stops)[:distance].to_f
+      line_haul = helpers.calculate_line_haul(miles, rate)
+      fuel_surcharge = (fsch_percent / 100) * line_haul
+      total = line_haul + fuel_surcharge
+
+      return { miles: miles, line_haul: line_haul, fuel_surcharge: fuel_surcharge, total: total }
+
     end
 end
