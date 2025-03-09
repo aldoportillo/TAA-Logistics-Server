@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_20_214329) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -170,6 +170,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_20_214329) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "contacted"
+    t.string "destination"
+    t.float "rate_per_mile"
+    t.float "fsch_percent"
+    t.float "miles"
+    t.float "line_haul"
+    t.float "fuel_surcharge"
+    t.float "total"
   end
 
   create_table "users", force: :cascade do |t|

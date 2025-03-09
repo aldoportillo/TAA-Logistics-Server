@@ -1,18 +1,19 @@
 <p style="color: green"><%= notice %></p>
-
 <div class="row justify-content-between align-items-center">
-  <h2 class="col-auto">Quotes</h2>
-
-  <%= search_form_for @q, url: quotes_path, method: :get, html: { class: 'form-inline' } do |f| %>
-  <div class="form-group mb-2">
-    <%= f.label :contact_name_or_company_name_cont, "Name", class: 'mr-2' %>
-    <%= f.search_field :contact_name_or_company_name_cont, class: 'form-control' %>
+  <div class="col-auto d-flex align-items-center">
+    <h2 class="mb-0 mr-3">Quotes</h2>
+    <%= link_to new_quote_path, class: 'btn btn-success' do %>+<% end %>
   </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <%= f.submit "Search", class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
+  <%= search_form_for @q, url: quotes_path, method: :get, html: { class: 'form-inline col-auto' } do |f| %>
+    <div class="form-group mb-2">
+      <%= f.label :contact_name_or_company_name_cont, "Name", class: 'mr-2' %>
+      <%= f.search_field :contact_name_or_company_name_cont, class: 'form-control' %>
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <%= f.submit "Search", class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
 </div>
 <div id="quotes">
   <table class="table table-striped">
@@ -30,14 +31,14 @@
     </thead>
     <tbody>
       <% @quotes.each do |quote| %>
-        <tr>     
-            <td><%= quote.company_name %></td>
-            <td><%= quote.email %></td>
-            <td><%= quote.phone %></td>
-            <td><%= quote.delivery_date&.strftime("%B %d, %Y") %></td>
-            <td><%= quote.from %></td>
-            <td><%= quote.created_at.strftime("%B %d, %Y") %></td>
-            <td>
+        <tr>
+          <td><%= quote.company_name %></td>
+          <td><%= quote.email %></td>
+          <td><%= quote.phone %></td>
+          <td><%= quote.delivery_date&.strftime("%B %d, %Y") %></td>
+          <td><%= quote.from %></td>
+          <td><%= quote.created_at.strftime("%B %d, %Y") %></td>
+          <td>
             <%= form_with(model: quote, url: quote_path(quote), method: :patch, local: true) do |f| %>
               <%= f.check_box :contacted, onchange: 'this.form.submit();' %>
             <% end %>
@@ -47,6 +48,5 @@
       <% end %>
     </tbody>
   </table>
-
   <%= paginate @quotes %>
 </div>
