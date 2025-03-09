@@ -49,11 +49,7 @@ class ProcessCsvJob < ApplicationJob
         "Ramp/Port Location"     => row[:ramp_port_location],
         "Consignee/Shipper City" => row[:consignee_shipper_city],
         "Consignee/Shipper State"=> row[:consignee_shipper_state],
-        "LH + FSCH"              => calculate_linehaul_plus_fuelsurcharge(
-                                      distance_result[:distance],
-                                      params[:rate_per_mile],
-                                      params[:fuel_surcharge]
-                                    ),
+        "LH + FSCH"              => calculate_line_haul(distance_result[:distance], params[:rate_per_mile]).round(0),
         "Distance (mi)"          => distance_result[:distance]
       }
     end
