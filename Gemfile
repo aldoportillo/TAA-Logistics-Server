@@ -93,7 +93,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 
   gem "better_errors"
-gem "binding_of_caller"
+  gem "binding_of_caller"
 end
 
 group :development do
