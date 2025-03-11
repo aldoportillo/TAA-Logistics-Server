@@ -98,7 +98,6 @@ class QuotesController < ApplicationController
     def quote_total(destination, rate, fsch_percent)
       google_maps = GoogleMapsService.new
 
-      debugger
       trip_stops = [
         "18949 Wolf Rd, Mokena, IL 60448",
         destination,
