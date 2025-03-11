@@ -1,9 +1,11 @@
-<h1>New quote</h1>
-
-<%= render "form", quote: @quote %>
-
-<br>
-
-<div>
-  <%= link_to "Back to quotes", quotes_path %>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h1>New quote</h1>
+    <div>
+      <%= link_to "Back to quotes", quotes_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+  <div class="card p-4 my-3">
+    <%= render "form", quote: @quote %>
+  </div>
 </div>

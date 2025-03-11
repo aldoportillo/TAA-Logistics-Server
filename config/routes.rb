@@ -20,6 +20,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :employees, controller: 'employees'
+  
+  resources :bids do
+    collection do
+      post :upload_csv
+      get  :download_processed
+    end
+  end
 
   # Defines the root path route ("/")
   

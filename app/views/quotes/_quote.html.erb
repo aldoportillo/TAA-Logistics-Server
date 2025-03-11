@@ -30,20 +30,25 @@
     </div>
 
     <div style="flex: 1;">
-      <h4>Commodity Information</h4>
+      <h4>Destination Information</h4>
       <p>
-        <strong>Commodity:</strong>
-        <%= quote.commodity %>
+        <strong>Miles:</strong>
+        <%= quote.miles %> miles
       </p>
 
       <p>
-        <strong>Commodity Temp:</strong>
-        <%= quote.commodity_temp %>
+        <strong>Line Haul:</strong>
+        $<%= quote.line_haul %> ($<%= quote.rate_per_mile %> per mile)
       </p>
 
       <p>
-        <strong>Commodity Gross Weight:</strong>
-        <%= quote.commodity_gross_weight %>
+        <strong>Fuel Surcharge:</strong>
+        $<%= quote.fuel_surcharge %> (at <%= quote.fsch_percent %>%)
+      </p>
+
+      <p>
+        <strong>Total:</strong>
+        $<%= quote.total %>
       </p>
     </div>
   </div>
@@ -110,4 +115,21 @@
       </p>
     </div>
   </div>
+  <div style="flex: 1;">
+      <h4>Commodity Information</h4>
+      <p>
+        <strong>Commodity:</strong>
+        <%= quote.commodity %>
+      </p>
+
+      <p>
+        <strong>Commodity Temp:</strong>
+        <%= quote.commodity_temp %>
+      </p>
+
+      <p>
+        <strong>Commodity Gross Weight:</strong>
+        <%= quote.commodity_gross_weight %>
+      </p>
+    </div>
 </div>
