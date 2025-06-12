@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ports
   resources :pricing_matrices
   resources :inquiries
   resources :applications

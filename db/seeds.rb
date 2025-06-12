@@ -42,3 +42,24 @@ pricing_data.each do |data|
 end
 
 puts "Created #{PricingMatrix.count} pricing matrix records"
+
+# Create initial ports
+ports = [
+  { name: 'CN Harvey', address: '16800 Center St, Harvey, IL 60426', active: true },
+  { name: 'BNSF LPC / UP Global IV', address: '3000 Centerpoint Way, Joliet, IL 60436', active: true },
+  { name: 'CP Rails', address: '10800 Franklin Ave, Franklin Park, IL 60131', active: true },
+  { name: 'CSX/NS Chicago', address: '2101 W 59th St, Chicago, IL 60636', active: true },
+  { name: 'CHICAGO, IL - NORFOLK SOUTHERN - LANDERS (I104)', address: '7600 S Western Ave, Chicago, IL 60620', active: true },
+  { name: 'CHICAGO, IL - BNSF - CHICAGO - LPC (H572)', address: '26664 Elwood International Port Rd, Elwood, IL, 60421, USA', active: true },
+  { name: 'CHICAGO, IL - UP JOLIET INTERMODAL TERMINAL GLOBAL 4 (I206)', address: '3000 Centerpoint Way, Joliet, IL 60436', active: true },
+  { name: 'CHICAGO, IL - CN RAIL - CHICAGO - HARVEY (I092)', address: '16800 Center St, Harvey, IL 60426', active: true },
+  { name: 'CHICAGO, IL - CSX (J470)', address: '2101 W 59th St, Chicago, IL 60636', active: true },
+  { name: 'CHICAGO, IL - CP RAIL - CHICAGO, BENSENVILLE (J830)', address: '10800 Franklin Ave, Franklin Park, IL 60131', active: true }
+]
+
+ports.each do |port_data|
+  Port.find_or_create_by!(name: port_data[:name]) do |port|
+    port.address = port_data[:address]
+    port.active = port_data[:active]
+  end
+end
