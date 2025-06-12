@@ -37,7 +37,6 @@ class QuotesController < ApplicationController
 
   # POST /quotes or /quotes.json
   def create
-
     @quote = Quote.new(quote_params)
 
     if quote_params[:destination].present?
@@ -92,7 +91,7 @@ class QuotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def quote_params
-      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes, :contacted, :destination, :rate_per_mile, :fsch_percent, :miles, :line_haul, :fuel_surcharge, :total)
+      params.require(:quote).permit(:company_name, :contact_name, :email, :phone, :fax, :commodity, :commodity_temp, :commodity_gross_weight, :from, :delivery_date, :delivery_zip_code, :shipping_date, :shipping_zip_code, :CS, :container_size, :pallets, :equipment_type, :rail_destination, :questions_or_notes, :contacted, :destination, :rate_per_mile, :fsch_percent, :miles, :line_haul, :fuel_surcharge, :total, :created_by_employee)
     end
 
     def quote_total(destination, rate, fsch_percent)
