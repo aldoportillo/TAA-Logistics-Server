@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Pricing matrices</h1>
+
+<div id="pricing_matrices">
+  <% @pricing_matrices.each do |pricing_matrix| %>
+    <%= render pricing_matrix %>
+    <p>
+      <%= link_to "Show this pricing matrix", pricing_matrix %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New pricing matrix", new_pricing_matrix_path %>

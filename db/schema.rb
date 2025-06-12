@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_12_182525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "contacted"
+  end
+
+  create_table "pricing_matrices", force: :cascade do |t|
+    t.integer "start_miles"
+    t.integer "end_miles"
+    t.decimal "price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "quotes", force: :cascade do |t|

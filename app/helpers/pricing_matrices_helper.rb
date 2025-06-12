@@ -1,0 +1,2 @@
+module PricingMatricesHelper
+end

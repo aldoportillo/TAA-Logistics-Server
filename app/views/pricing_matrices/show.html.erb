@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pricing_matrix %>
+
+<div>
+  <%= link_to "Edit this pricing matrix", edit_pricing_matrix_path(@pricing_matrix) %> |
+  <%= link_to "Back to pricing matrices", pricing_matrices_path %>
+
+  <%= button_to "Destroy this pricing matrix", @pricing_matrix, method: :delete %>
+</div>
