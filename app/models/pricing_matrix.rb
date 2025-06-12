@@ -3,6 +3,18 @@ class PricingMatrix < ApplicationRecord
   validate :end_miles_greater_than_start_miles
   validate :no_overlapping_ranges
 
+  def self.line_haul_for_miles(miles, rate, fuel_included: true)
+    miles = miles.to_f
+    max_end = PricingMatrix.maximum(:end_miles)
+    if miles > max_end
+      (miles * rate.to_f).round(2) #If miles exceed matrix
+    else
+      record = PricingMatrix.where('start_miles <= ? AND end_miles > ?', miles, miles).first
+      return 0.0 unless record
+      fuel_included ? record.line_haul_plus_29_5_fuel_surcharge : record.line_haul
+    end
+  end
+
   private
 
   def end_miles_greater_than_start_miles
@@ -13,14 +25,13 @@ class PricingMatrix < ApplicationRecord
     end
   end
 
+  # Inclusive/exclusive: [start_miles, end_miles)
   def no_overlapping_ranges
     return if start_miles.blank? || end_miles.blank?
+    return if new_record? && PricingMatrix.count.zero?
 
     overlapping = PricingMatrix.where.not(id: id).where(
-      '(start_miles <= ? AND end_miles >= ?) OR (start_miles <= ? AND end_miles >= ?) OR (start_miles >= ? AND end_miles <= ?)',
-      end_miles, start_miles,  # Case 1: New range overlaps with existing range's start
-      start_miles, end_miles,  # Case 2: New range overlaps with existing range's end
-      start_miles, end_miles   # Case 3: New range is completely within existing range
+      'start_miles < ? AND end_miles > ?', end_miles, start_miles
     )
 
     if overlapping.exists?
