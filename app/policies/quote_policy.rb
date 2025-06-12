@@ -8,6 +8,6 @@ class QuotePolicy < Struct.new(:user, :quote)
   end
 
   def destroy?
-    user.admin?
+    user.admin? || user.broker?
   end
 end
