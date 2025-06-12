@@ -1,27 +1,32 @@
 class PricingMatricesController < ApplicationController
   before_action :set_pricing_matrix, only: %i[ show edit update destroy ]
+  before_action :authorize_pricing_matrix
 
   # GET /pricing_matrices or /pricing_matrices.json
   def index
-    @pricing_matrices = PricingMatrix.all
+    @pricing_matrices = policy_scope(PricingMatrix)
   end
 
   # GET /pricing_matrices/1 or /pricing_matrices/1.json
   def show
+    authorize @pricing_matrix
   end
 
   # GET /pricing_matrices/new
   def new
     @pricing_matrix = PricingMatrix.new
+    authorize @pricing_matrix
   end
 
   # GET /pricing_matrices/1/edit
   def edit
+    authorize @pricing_matrix
   end
 
   # POST /pricing_matrices or /pricing_matrices.json
   def create
     @pricing_matrix = PricingMatrix.new(pricing_matrix_params)
+    authorize @pricing_matrix
 
     respond_to do |format|
       if @pricing_matrix.save
@@ -36,6 +41,7 @@ class PricingMatricesController < ApplicationController
 
   # PATCH/PUT /pricing_matrices/1 or /pricing_matrices/1.json
   def update
+    authorize @pricing_matrix
     respond_to do |format|
       if @pricing_matrix.update(pricing_matrix_params)
         format.html { redirect_to @pricing_matrix, notice: "Pricing matrix was successfully updated." }
@@ -49,6 +55,7 @@ class PricingMatricesController < ApplicationController
 
   # DELETE /pricing_matrices/1 or /pricing_matrices/1.json
   def destroy
+    authorize @pricing_matrix
     @pricing_matrix.destroy!
 
     respond_to do |format|
@@ -58,6 +65,10 @@ class PricingMatricesController < ApplicationController
   end
 
   private
+    def authorize_pricing_matrix
+      authorize PricingMatrix
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_pricing_matrix
       @pricing_matrix = PricingMatrix.find(params[:id])
@@ -65,6 +76,6 @@ class PricingMatricesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pricing_matrix_params
-      params.require(:pricing_matrix).permit(:start_miles, :end_miles, :price)
+      params.require(:pricing_matrix).permit(:start_miles, :end_miles, :line_haul, :line_haul_plus_29_5_fuel_surcharge)
     end
 end

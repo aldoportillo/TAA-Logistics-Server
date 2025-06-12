@@ -13,6 +13,16 @@
       <p class="form-text text-muted">Enter the fuel surcharge in percentage. This is the percentage of the rate per mile if you wish to implement it.</p>
     </div>
     <div class="mb-3">
+      <div class="form-check">
+        <%= form.check_box :use_accurate_miles, { class: "form-check-input", checked: true }, "true", "false" %>
+        <%= form.label :use_accurate_miles, "Use Accurate Miles", class: "form-check-label" %>
+      </div>
+      <p class="form-text text-muted">
+        <strong>Checked:</strong> Mokena → Ramp → Consignee → Mokena (4-stop accurate route)<br>
+        <strong>Unchecked:</strong> Ramp → Consignee → Ramp (3-stop simple route)
+      </p>
+    </div>
+    <div class="mb-3">
       <%= form.label :file, "Select CSV file", class: "form-label" %>
       <%= form.file_field :file, class: "form-control" %>
     </div>

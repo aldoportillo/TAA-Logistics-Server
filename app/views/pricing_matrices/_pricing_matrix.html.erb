@@ -10,8 +10,12 @@
   </p>
 
   <p>
-    <strong>Price:</strong>
-    <%= pricing_matrix.price %>
+    <strong>Line Haul (without fuel):</strong>
+    <%= number_to_currency(pricing_matrix.line_haul) %>
   </p>
 
+  <p>
+    <strong>Line Haul (with 29.5% fuel):</strong>
+    <%= number_to_currency(pricing_matrix.line_haul_plus_29_5_fuel_surcharge) %>
+  </p>
 </div>

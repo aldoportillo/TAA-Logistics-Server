@@ -1,9 +1,9 @@
 <%= form_with(model: pricing_matrix) do |form| %>
   <% if pricing_matrix.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(pricing_matrix.errors.count, "error") %> prohibited this pricing_matrix from being saved:</h2>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(pricing_matrix.errors.count, "error") %> prohibited this pricing matrix from being saved:</h4>
 
-      <ul>
+      <ul class="mb-0">
         <% pricing_matrix.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,22 +11,40 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :start_miles, style: "display: block" %>
-    <%= form.number_field :start_miles %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :start_miles, class: "form-label" %>
+        <%= form.number_field :start_miles, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :end_miles, class: "form-label" %>
+        <%= form.number_field :end_miles, class: "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :end_miles, style: "display: block" %>
-    <%= form.number_field :end_miles %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :line_haul, "Line Haul (without fuel)", class: "form-label" %>
+        <%= form.number_field :line_haul, step: :any, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :line_haul_plus_29_5_fuel_surcharge, "Line Haul (with 29.5% fuel)", class: "form-label" %>
+        <%= form.number_field :line_haul_plus_29_5_fuel_surcharge, step: :any, class: "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="d-flex justify-content-end gap-2">
+    <%= link_to "Cancel", pricing_matrices_path, class: "btn btn-secondary" %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

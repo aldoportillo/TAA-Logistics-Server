@@ -1,10 +1,53 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @pricing_matrix %>
-
-<div>
-  <%= link_to "Edit this pricing matrix", edit_pricing_matrix_path(@pricing_matrix) %> |
-  <%= link_to "Back to pricing matrices", pricing_matrices_path %>
-
-  <%= button_to "Destroy this pricing matrix", @pricing_matrix, method: :delete %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Pricing Matrix Details</h5>
+            <div class="btn-group">
+              <%= link_to edit_pricing_matrix_path(@pricing_matrix), class: "btn btn-warning" do %>
+                <i class="fas fa-edit"></i> Edit
+              <% end %>
+              <%= link_to pricing_matrices_path, class: "btn btn-secondary" do %>
+                <i class="fas fa-arrow-left"></i> Back
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h6 class="text-muted mb-2">Start Miles</h6>
+                <p class="mb-0"><%= @pricing_matrix.start_miles %></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h6 class="text-muted mb-2">End Miles</h6>
+                <p class="mb-0"><%= @pricing_matrix.end_miles %></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h6 class="text-muted mb-2">Line Haul (without fuel)</h6>
+                <p class="mb-0"><%= number_to_currency(@pricing_matrix.line_haul) %></p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <h6 class="text-muted mb-2">Line Haul (with 29.5% fuel)</h6>
+                <p class="mb-0"><%= number_to_currency(@pricing_matrix.line_haul_plus_29_5_fuel_surcharge) %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
