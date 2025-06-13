@@ -4,10 +4,8 @@ class ApplicationsController < ApplicationController
 
   # GET /applications or /applications.json
   def index
-    
     @q = Application.order(created_at: :desc).ransack(params[:q])
-  
-    authorize @applications = @q.result(distinct: true).page(params[:page]).per(20)
+    authorize @applications = @q.result(distinct: true).page(params[:page]).per(20), policy_class: JobApplicationPolicy
 
     respond_to do |format|
       format.html
@@ -18,7 +16,7 @@ class ApplicationsController < ApplicationController
   # GET /applications/1 or /applications/1.json
   def show
     @application = Application.find(params[:id])
-    authorize @application
+    authorize @application, policy_class: JobApplicationPolicy
   end
 
   # GET /applications/new
@@ -28,6 +26,7 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1/edit
   def edit
+    authorize @application, policy_class: JobApplicationPolicy
   end
 
   # POST /applications or /applications.json
@@ -47,6 +46,8 @@ class ApplicationsController < ApplicationController
 
   # PATCH/PUT /applications/1 or /applications/1.json
   def update
+    authorize @application, policy_class: JobApplicationPolicy
+    
     respond_to do |format|
       if @application.update(application_params)
         format.html { redirect_to application_url(@application), notice: "Application was successfully updated." }
@@ -60,7 +61,8 @@ class ApplicationsController < ApplicationController
 
   # DELETE /applications/1 or /applications/1.json
   def destroy
-   authorize @application.destroy!
+    authorize @application, policy_class: JobApplicationPolicy
+    @application.destroy!
 
     respond_to do |format|
       format.html { redirect_to applications_url, notice: "Application was successfully destroyed." }
