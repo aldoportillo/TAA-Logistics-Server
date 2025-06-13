@@ -10,7 +10,7 @@ User.destroy_all
 puts "Creating admin user..."
 admin = User.create!(
   email: 'admin@taalogistics.com',
-  password: 'password123',
+  password: 'password',
   role: 'admin',
   phone_number: '555-0001'
 )
@@ -19,7 +19,7 @@ admin = User.create!(
 puts "Creating broker user..."
 broker = User.create!(
   email: 'broker@taalogistics.com',
-  password: 'password123',
+  password: 'password',
   role: 'broker',
   phone_number: '555-0002'
 )
@@ -77,7 +77,10 @@ employee_quotes = [
     phone: '555-1001',
     from: '18949 Wolf Rd, Mokena, IL 60448',
     rail_destination: 'CN Harvey',
-    created_by_employee: true
+    created_by_employee: true,
+    miles: 900,
+    line_haul: 600,
+    fsch_percent: 25,
   },
   {
     company_name: 'XYZ Transport',
@@ -86,7 +89,10 @@ employee_quotes = [
     phone: '555-1002',
     from: '18949 Wolf Rd, Mokena, IL 60448',
     rail_destination: 'BNSF LPC / UP Global IV',
-    created_by_employee: true
+    created_by_employee: true,
+    miles: 200,
+    line_haul: 500,
+    fsch_percent: 25,
   }
 ]
 
@@ -104,7 +110,10 @@ customer_quotes = [
     phone: '555-2001',
     from: '18949 Wolf Rd, Mokena, IL 60448',
     rail_destination: 'CP Rails',
-    created_by_employee: false
+    created_by_employee: false,
+    miles: 700,
+    line_haul: 200,
+    fsch_percent: 25,
   },
   {
     company_name: 'Ocean Freight Inc',
@@ -113,7 +122,10 @@ customer_quotes = [
     phone: '555-2002',
     from: '18949 Wolf Rd, Mokena, IL 60448',
     rail_destination: 'CSX/NS Chicago',
-    created_by_employee: false
+    created_by_employee: false,
+    miles: 500,
+    line_haul: 200,
+    fsch_percent: 25,
   }
 ]
 

@@ -3,8 +3,16 @@
 <div class="d-flex justify-content-between align-items-center">
   <h1>Quote Details</h1>
   <div>
-    <%= link_to "Back to quotes", quotes_path, class: "btn btn-primary" %> |
-    <%= button_to "Destroy this quote", @quote, method: :delete, class: "btn btn-danger" %>
+    <%= link_to "Back to quotes", quotes_path, class: "btn btn-secondary" %>
+    <%= link_to new_quote_path, class: 'btn btn-success', title: "New Quote" do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
+    <%= link_to edit_quote_path(@quote), class: "btn btn-warning", title: "Edit" do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+    <%= button_to quote_path(@quote), method: :delete, class: "btn btn-danger", title: "Delete", form: { class: 'd-inline', data: { turbo_confirm: "Are you sure?" } } do %>
+      <i class="fas fa-trash"></i>
+    <% end %>
   </div>
 </div>
 
