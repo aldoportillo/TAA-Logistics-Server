@@ -2,16 +2,17 @@ class QuotesController < ApplicationController
   before_action :set_quote, only: %i[ show edit update destroy ]
   skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
-  # GET /quotes or /quotes.json
+  # GET /quotes
   def index
-
-    @q = Quote.order(created_at: :desc).ransack(params[:q])
-  
-    authorize @quotes = @q.result(distinct: true).page(params[:page]).per(20)
+    @q = Quote.ransack(params[:q])
+    base_quotes = @q.result(distinct: true)
+    
+    @employee_quotes = base_quotes.where(created_by_employee: true).order(created_at: :desc)
+    @customer_quotes = base_quotes.where(created_by_employee: false).order(created_at: :desc)
 
     respond_to do |format|
       format.html
-      format.json { render json: @quotes }
+      format.json { render json: { employee_quotes: @employee_quotes, customer_quotes: @customer_quotes } }
     end
   end
 

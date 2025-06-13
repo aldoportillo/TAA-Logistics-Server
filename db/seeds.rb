@@ -1,49 +1,31 @@
-# Create admin user
-User.find_or_create_by!(
-  email: ENV['MAILER_EMAIL'] || 'admin@example.com'
-) do |user|
-  user.password = ENV['ADMIN_PASSWORD'] || 'password123'
-  user.password_confirmation = ENV['ADMIN_PASSWORD'] || 'password123'
-  user.role = 'admin'
-  user.name = 'Ed'
-  user.phone_number = '1234567890'  # Adding required phone number
-end
-
 # Clear existing data
+puts "Clearing existing data..."
+Quote.destroy_all
+Bid.destroy_all
+Port.destroy_all
 PricingMatrix.destroy_all
+User.destroy_all
 
-# Define the pricing data (inclusive/exclusive: [start_miles, end_miles))
-pricing_data = [
-  { start_miles: 0, end_miles: 20, line_haul_plus_29_5_fuel_surcharge: 375.00 },
-  { start_miles: 20, end_miles: 40, line_haul_plus_29_5_fuel_surcharge: 375.00 },
-  { start_miles: 40, end_miles: 60, line_haul_plus_29_5_fuel_surcharge: 400.00 },
-  { start_miles: 60, end_miles: 80, line_haul_plus_29_5_fuel_surcharge: 425.00 },
-  { start_miles: 80, end_miles: 90, line_haul_plus_29_5_fuel_surcharge: 450.00 },
-  { start_miles: 90, end_miles: 100, line_haul_plus_29_5_fuel_surcharge: 475.00 },
-  { start_miles: 100, end_miles: 120, line_haul_plus_29_5_fuel_surcharge: 500.00 },
-  { start_miles: 120, end_miles: 140, line_haul_plus_29_5_fuel_surcharge: 550.00 },
-  { start_miles: 140, end_miles: 160, line_haul_plus_29_5_fuel_surcharge: 600.00 },
-  { start_miles: 160, end_miles: 200, line_haul_plus_29_5_fuel_surcharge: 700.00 },
-  { start_miles: 200, end_miles: 250, line_haul_plus_29_5_fuel_surcharge: 750.00 },
-  { start_miles: 250, end_miles: 300, line_haul_plus_29_5_fuel_surcharge: 850.00 },
-  { start_miles: 300, end_miles: 360, line_haul_plus_29_5_fuel_surcharge: 950.00 },
-  { start_miles: 360, end_miles: 380, line_haul_plus_29_5_fuel_surcharge: 1000.00 },
-  { start_miles: 380, end_miles: 400, line_haul_plus_29_5_fuel_surcharge: 1050.00 }
-]
+# Create admin user
+puts "Creating admin user..."
+admin = User.create!(
+  email: 'admin@taalogistics.com',
+  password: 'password123',
+  role: 'admin',
+  phone_number: '555-0001'
+)
 
-# Create records one by one
-pricing_data.each do |data|
-  PricingMatrix.create!(
-    start_miles: data[:start_miles],
-    end_miles: data[:end_miles],
-    line_haul_plus_29_5_fuel_surcharge: data[:line_haul_plus_29_5_fuel_surcharge],
-    line_haul: (data[:line_haul_plus_29_5_fuel_surcharge] / 1.295).round(2)
-  )
-end
+# Create broker user
+puts "Creating broker user..."
+broker = User.create!(
+  email: 'broker@taalogistics.com',
+  password: 'password123',
+  role: 'broker',
+  phone_number: '555-0002'
+)
 
-puts "Created #{PricingMatrix.count} pricing matrix records"
-
-# Create initial ports
+# Create ports
+puts "Creating ports..."
 ports = [
   { name: 'CN Harvey', address: '16800 Center St, Harvey, IL 60426', active: true },
   { name: 'BNSF LPC / UP Global IV', address: '3000 Centerpoint Way, Joliet, IL 60436', active: true },
@@ -58,8 +40,85 @@ ports = [
 ]
 
 ports.each do |port_data|
-  Port.find_or_create_by!(name: port_data[:name]) do |port|
-    port.address = port_data[:address]
-    port.active = port_data[:active]
-  end
+  Port.create!(port_data)
 end
+
+# Create pricing matrices
+puts "Creating pricing matrices..."
+pricing_matrices = [
+  { start_miles: 0, end_miles: 20, line_haul_plus_29_5_fuel_surcharge: 375.00, line_haul: 289.58 },
+  { start_miles: 20, end_miles: 40, line_haul_plus_29_5_fuel_surcharge: 375.00, line_haul: 289.58 },
+  { start_miles: 40, end_miles: 60, line_haul_plus_29_5_fuel_surcharge: 400.00, line_haul: 308.88 },
+  { start_miles: 60, end_miles: 80, line_haul_plus_29_5_fuel_surcharge: 425.00, line_haul: 328.19 },
+  { start_miles: 80, end_miles: 90, line_haul_plus_29_5_fuel_surcharge: 450.00, line_haul: 347.49 },
+  { start_miles: 90, end_miles: 100, line_haul_plus_29_5_fuel_surcharge: 475.00, line_haul: 366.80 },
+  { start_miles: 100, end_miles: 120, line_haul_plus_29_5_fuel_surcharge: 500.00, line_haul: 386.10 },
+  { start_miles: 120, end_miles: 140, line_haul_plus_29_5_fuel_surcharge: 550.00, line_haul: 424.71 },
+  { start_miles: 140, end_miles: 160, line_haul_plus_29_5_fuel_surcharge: 600.00, line_haul: 463.32 },
+  { start_miles: 160, end_miles: 200, line_haul_plus_29_5_fuel_surcharge: 700.00, line_haul: 540.54 },
+  { start_miles: 200, end_miles: 250, line_haul_plus_29_5_fuel_surcharge: 750.00, line_haul: 579.15 },
+  { start_miles: 250, end_miles: 300, line_haul_plus_29_5_fuel_surcharge: 850.00, line_haul: 656.37 },
+  { start_miles: 300, end_miles: 360, line_haul_plus_29_5_fuel_surcharge: 950.00, line_haul: 733.59 },
+  { start_miles: 360, end_miles: 380, line_haul_plus_29_5_fuel_surcharge: 1000.00, line_haul: 772.20 },
+  { start_miles: 380, end_miles: 400, line_haul_plus_29_5_fuel_surcharge: 1050.00, line_haul: 810.81 }
+]
+
+pricing_matrices.each do |matrix_data|
+  PricingMatrix.create!(matrix_data)
+end
+
+# Create employee quotes
+puts "Creating employee quotes..."
+employee_quotes = [
+  {
+    company_name: 'ABC Logistics',
+    contact_name: 'John Smith',
+    email: 'john@abclogistics.com',
+    phone: '555-1001',
+    from: '18949 Wolf Rd, Mokena, IL 60448',
+    rail_destination: 'CN Harvey',
+    created_by_employee: true
+  },
+  {
+    company_name: 'XYZ Transport',
+    contact_name: 'Sarah Johnson',
+    email: 'sarah@xyztransport.com',
+    phone: '555-1002',
+    from: '18949 Wolf Rd, Mokena, IL 60448',
+    rail_destination: 'BNSF LPC / UP Global IV',
+    created_by_employee: true
+  }
+]
+
+employee_quotes.each do |quote_data|
+  Quote.create!(quote_data)
+end
+
+# Create customer quotes
+puts "Creating customer quotes..."
+customer_quotes = [
+  {
+    company_name: 'Global Shipping Co',
+    contact_name: 'Mike Wilson',
+    email: 'mike@globalshipping.com',
+    phone: '555-2001',
+    from: '18949 Wolf Rd, Mokena, IL 60448',
+    rail_destination: 'CP Rails',
+    created_by_employee: false
+  },
+  {
+    company_name: 'Ocean Freight Inc',
+    contact_name: 'Lisa Brown',
+    email: 'lisa@oceanfreight.com',
+    phone: '555-2002',
+    from: '18949 Wolf Rd, Mokena, IL 60448',
+    rail_destination: 'CSX/NS Chicago',
+    created_by_employee: false
+  }
+]
+
+customer_quotes.each do |quote_data|
+  Quote.create!(quote_data)
+end
+
+puts "Seed data created successfully!"
