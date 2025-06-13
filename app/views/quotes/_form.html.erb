@@ -35,6 +35,14 @@
   </div>
 
   <div class="mb-3">
+    <%= form.label :from, "From (Ramp Location)", class: "form-label" %>
+    <%= form.select :from, 
+        options_from_collection_for_select((@ports || Port.where(active: true).order(:name)), :address, :name, quote.from), 
+        { prompt: "Select a ramp location" }, 
+        { class: "form-control" } %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :destination, class: "form-label" %>
     <%= form.text_field :destination, class:"form-control" %>
   </div>

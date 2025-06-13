@@ -1,21 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
-<div class="row justify-content-between align-items-center mb-4">
-  <div class="col-auto d-flex align-items-center">
-    <h2 class="mb-0 mr-3">Quotes</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Quotes</h2>
+  <div class="d-flex align-items-center">
+    <%= search_form_for @q, url: quotes_path, method: :get, html: { class: 'd-flex align-items-center me-3' } do |f| %>
+      <%= f.label :contact_name_or_company_name_cont, "Name", class: 'me-2' %>
+      <%= f.search_field :contact_name_or_company_name_cont, class: 'form-control me-2', style: 'width: 200px;' %>
+      <%= f.submit "Search", class: 'btn btn-primary me-3' %>
+    <% end %>
     <%= link_to new_quote_path, class: 'btn btn-success' do %>
       <i class="fas fa-plus"></i>
     <% end %>
   </div>
-  <%= search_form_for @q, url: quotes_path, method: :get, html: { class: 'form-inline col-auto' } do |f| %>
-    <div class="form-group mb-2">
-      <%= f.label :contact_name_or_company_name_cont, "Name", class: 'mr-2' %>
-      <%= f.search_field :contact_name_or_company_name_cont, class: 'form-control' %>
-    </div>
-    <div class="form-group mx-sm-3 mb-2">
-      <%= f.submit "Search", class: 'btn btn-primary' %>
-    </div>
-  <% end %>
 </div>
 
 <div class="container-fluid">

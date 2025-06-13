@@ -1,4 +1,4 @@
-class QuotePolicy < ApplicationPolicy
+class BidPolicy < ApplicationPolicy
   def index?
     user&.admin? || user&.broker?
   end
@@ -12,7 +12,7 @@ class QuotePolicy < ApplicationPolicy
   end
 
   def create?
-    true # Allow anyone to create quotes (like the current behavior)
+    user&.admin? || user&.broker?
   end
 
   def edit?
@@ -24,6 +24,14 @@ class QuotePolicy < ApplicationPolicy
   end
 
   def destroy?
+    user&.admin?
+  end
+
+  def upload_csv?
+    user&.admin? || user&.broker?
+  end
+
+  def download_processed?
     user&.admin? || user&.broker?
   end
 
@@ -36,4 +44,4 @@ class QuotePolicy < ApplicationPolicy
       end
     end
   end
-end
+end 
