@@ -123,7 +123,7 @@ class ProcessCsvJob < ApplicationJob
           "Destination City" => "#{destination_info[:display]} (#{google_round_trip_miles.round(0)} miles #{route_type})",
           "Consignee/Shipper State" => destination_info[:state],
           "LH + FSCH" => calculate_line_haul_including_fuel(google_round_trip_miles, params[:rate_per_mile]).round(2),
-          "LH only" => (calculate_line_haul_including_fuel(google_round_trip_miles, params[:rate_per_mile]).round(2) / 1.295),
+          "LH only" => (calculate_line_haul_including_fuel(google_round_trip_miles, params[:rate_per_mile]) / 1.295).round(2),
           "Distance (mi)" => google_round_trip_miles.round(2)
         }
 
