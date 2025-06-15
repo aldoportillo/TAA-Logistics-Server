@@ -8,12 +8,12 @@ class QuotesController < ApplicationController
     @q = Quote.ransack(params[:q])
     base_quotes = policy_scope(Quote).merge(@q.result(distinct: true))
     
-    @employee_quotes = base_quotes.where(created_by_employee: true).order(created_at: :desc)
     @customer_quotes = base_quotes.where(created_by_employee: false).order(created_at: :desc)
+    @employee_quotes = base_quotes.where(created_by_employee: true).order(created_at: :desc)
 
     respond_to do |format|
       format.html
-      format.json { render json: { employee_quotes: @employee_quotes, customer_quotes: @customer_quotes } }
+      format.json { render json: { customer_quotes: @customer_quotes, employee_quotes: @employee_quotes, } }
     end
   end
 
