@@ -7,12 +7,7 @@ class GoogleMapsService
 
   def initialize(api_key = ENV['GOOGLE_MAPS_API_KEY'])
     @api_key = api_key
-    @port_addresses = {
-      'CN Harvey' => "16800 Center St, Harvey, IL 60426",
-      'BNSF LPC / UP Global IV' => "3000 Centerpoint Way, Joliet, IL 60436",
-      'CP Rails' => "10800 Franklin Ave, Franklin Park, IL 60131",
-      'CSX/NS Chicago' => "2101 W 59th St, Chicago, IL 60636"
-    }
+    @port_addresses = Port.where(active: true).pluck(:name, :address).to_h
     @distance_cache = {}
   end
 

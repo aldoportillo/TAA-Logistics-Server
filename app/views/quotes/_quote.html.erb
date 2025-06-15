@@ -50,6 +50,12 @@
         <strong>Total:</strong>
         $<%= quote.total %>
       </p>
+
+      <p>
+        <strong>Overnight:</strong>
+        <%= (quote.miles.to_f / 600).floor %>
+      </p>
+      
     </div>
   </div>
 

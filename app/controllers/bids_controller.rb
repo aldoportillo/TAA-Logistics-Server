@@ -3,15 +3,19 @@ class BidsController < ApplicationController
 
   # GET /bids
   def index
-    @bids = Bid.all
+    authorize Bid
+    @bids = policy_scope(Bid)
   end
 
   # GET /bids/new
   def new
+    @bid = Bid.new
+    authorize @bid
   end
 
   # POST /bids/upload
   def upload_csv
+    authorize Bid, :upload_csv?
     uploaded_file = params[:file]
     if uploaded_file.blank?
       redirect_to bids_path, alert: "Please upload a CSV file." and return
@@ -34,6 +38,7 @@ class BidsController < ApplicationController
   # GET /bids/:id
   def show
     if params[:id] == 'processed'
+      authorize Bid, :show?
       if params[:filename].blank?
         raise "Missing filename parameter for processed CSV!"
       end
@@ -47,12 +52,13 @@ class BidsController < ApplicationController
       @csv_data = CSV.read(csv_file, headers: true)
       @processed_filename = processed_filename
     else
-      @bid = Bid.find(params[:id])
+      authorize @bid
     end
   end
 
   # GET /bids/download_processed_bids
   def download_processed
+    authorize Bid, :download_processed?
     if params[:filename].blank?
       raise "Missing filename parameter for download!"
     end
@@ -68,6 +74,7 @@ class BidsController < ApplicationController
 
   # DELETE /bids/1
   def destroy
+    authorize @bid
     @bid.destroy!
     respond_to do |format|
       format.html { redirect_to bids_path, status: :see_other, notice: "Bid was successfully destroyed." }

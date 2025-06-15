@@ -10,6 +10,10 @@
     </div>
   <% end %>
 
+  <% if current_user&.admin? || current_user&.broker? %>
+    <%= form.hidden_field :created_by_employee, value: true %>
+  <% end %>
+
   <div class="mb-3">
     <%= form.label :company_name, class: "form-label" %>
     <%= form.text_field :company_name, class:"form-control" %>
@@ -28,6 +32,14 @@
   <div class="mb-3">
     <%= form.label :phone, class: "form-label" %>
     <%= form.text_field :phone, class:"form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :from, "From (Ramp Location)", class: "form-label" %>
+    <%= form.select :from, 
+        options_from_collection_for_select((@ports || Port.where(active: true).order(:name)), :address, :name, quote.from), 
+        { prompt: "Select a ramp location" }, 
+        { class: "form-control" } %>
   </div>
 
   <div class="mb-3">

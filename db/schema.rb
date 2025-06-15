@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_12_214956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -147,6 +147,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
     t.boolean "contacted"
   end
 
+  create_table "ports", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pricing_matrices", force: :cascade do |t|
+    t.integer "start_miles"
+    t.integer "end_miles"
+    t.decimal "line_haul", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "line_haul_plus_29_5_fuel_surcharge", precision: 10, scale: 2
+  end
+
   create_table "quotes", force: :cascade do |t|
     t.string "company_name"
     t.string "contact_name"
@@ -177,6 +194,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_222229) do
     t.float "line_haul"
     t.float "fuel_surcharge"
     t.float "total"
+    t.boolean "created_by_employee", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,21 @@
+<div id="<%= dom_id pricing_matrix %>">
+  <p>
+    <strong>Start miles:</strong>
+    <%= pricing_matrix.start_miles %>
+  </p>
+
+  <p>
+    <strong>End miles:</strong>
+    <%= pricing_matrix.end_miles %>
+  </p>
+
+  <p>
+    <strong>Line Haul (without fuel):</strong>
+    <%= number_to_currency(pricing_matrix.line_haul) %>
+  </p>
+
+  <p>
+    <strong>Line Haul (with 29.5% fuel):</strong>
+    <%= number_to_currency(pricing_matrix.line_haul_plus_29_5_fuel_surcharge) %>
+  </p>
+</div>
