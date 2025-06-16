@@ -1,0 +1,82 @@
+<!-- Help Modal -->
+<div class="modal fade" id="helpModal<%= page_name.camelize %>" tabindex="-1" aria-labelledby="helpModal<%= page_name.camelize %>Label" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="helpModal<%= page_name.camelize %>Label">
+          <i class="fas fa-info-circle me-2"></i>
+          <%= page_title %> - Help & Instructions
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "shared/help_instructions/#{page_name}_instructions" %>
+      </div>
+      
+      <!-- Video Styling for Help Instructions -->
+      <style>
+        .help-instructions video {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          margin: 1rem 0;
+          border: 2px solid #e9ecef;
+          background-color: #000;
+        }
+        
+        .help-instructions video:hover {
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          transform: translateY(-2px);
+          transition: all 0.3s ease;
+        }
+        
+        .help-instructions {
+          line-height: 1.6;
+        }
+        
+        .help-instructions h6 {
+          margin-top: 1.5rem;
+          margin-bottom: 0.75rem;
+          font-weight: 600;
+        }
+        
+        .help-instructions h6:first-child {
+          margin-top: 0;
+        }
+        
+        .help-instructions p {
+          margin-bottom: 1rem;
+          color: #495057;
+        }
+        
+        .help-instructions ol, .help-instructions ul {
+          margin-bottom: 1rem;
+          padding-left: 1.5rem;
+        }
+        
+        .help-instructions li {
+          margin-bottom: 0.5rem;
+          color: #495057;
+        }
+        
+        .help-instructions b, .help-instructions strong {
+          color: #212529;
+          font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+          .help-instructions video {
+            margin: 0.75rem 0;
+          }
+        }
+      </style>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="fas fa-times me-1"></i>Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

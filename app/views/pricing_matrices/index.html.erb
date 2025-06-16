@@ -6,7 +6,12 @@
       <div class="card">
         <div class="card-header">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Pricing Matrices</h5>
+            <div class="d-flex align-items-center">
+              <h5 class="mb-0 me-2">Pricing Matrices</h5>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#helpModalPricingMatrices" title="Help & Instructions">
+                <i class="fas fa-question-circle"></i>
+              </button>
+            </div>
             <%= link_to new_pricing_matrix_path, class: "btn btn-primary" do %>
               <i class="fas fa-plus"></i> New Pricing Matrix
             <% end %>
@@ -51,3 +56,6 @@
     </div>
   </div>
 </div>
+
+<!-- Help Modal -->
+<%= render 'shared/help_modal', page_name: 'pricing_matrices', page_title: 'Pricing Matrices' %>

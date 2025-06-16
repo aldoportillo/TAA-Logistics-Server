@@ -1,6 +1,14 @@
 
     <div class="container mt-4">
-        <h1 class="text-center">Welcome to TAA Logistics Server</h1>
+        <div class="text-center mb-3">
+            <h1 class="d-inline-block me-2">Welcome to TAA Logistics Server</h1>
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#helpModalHome" title="Help & Instructions">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
         <p class="text-center">This is the homepage of our logistics server.</p>
         <p class="text-center">Feel free to explore the different sections of our website using the navigation bar above.</p>
     </div>
+
+    <!-- Help Modal -->
+    <%= render 'shared/help_modal', page_name: 'home', page_title: 'Getting Started' %>
