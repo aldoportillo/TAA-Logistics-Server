@@ -1,0 +1,58 @@
+<div class="help-instructions">
+  <h6><i class="fas fa-exclamation-triangle text-warning me-2"></i>Warning</h6>
+  <p>Please be careful with the data that you are uploading. If you are not careful, you could end up with incorrect data and another run is needed.</p>
+  <p>Here is a check list of what you need to verify before running the tool:</p>
+  <ul>
+    <li>
+      If the bid sheet uses ports as origins: you need to make sure that you have added the <b>exact port name</b> to the <a href="/ports">ports</a> page.
+    </li>
+    <li>
+      The rate per mile is correct and it is not accounting for fuel or round trip. Typically this has been set to 1.93.
+    </li>
+    <li>
+      The fuel surcharge is correct. This has been set to 0 for previous runs but it is an option if needed.
+    </li>
+    <li>
+      The accurate miles is set to false. This has been set to false for previous runs but it is an option if needed.
+    </li>
+    <li>
+      The column mapping is correct: there are two columns for destination and origin because some bid sheets may have multiple columns for the destination and origin and some may not. If it doesn't you can leave the second one for each blank
+    </li>
+    <li>
+      The column names need to match the names of the columns in the CSV file.
+    </li>
+  </ul>
+  <h6><i class="fas fa-video text-info me-2"></i>Video</h6>
+  <video src="https://res.cloudinary.com/dkhtrg1ts/video/upload/f_auto:video,q_auto/v1/taa/instructions/a9v7fznjvlmgwldyztsf" controls></video>
+  <h6><i class="fas fa-upload text-primary me-2"></i>CSV Upload & Processing</h6>
+  <p>This tool is designed to help you fill out bids with a lot of columns and should be used carefully to ensure that it is all correct.</p>
+  <ol>
+    <li>
+      Prepare your data: open up the excel file and export the sheet that contains the origins and destinations as a <b>CSV file</b>.
+    </li>
+    <li>
+      Fill out rate per mile <b>without fuel</b> -- the distance that is used is round trip so make sure you do not double the price to account for that
+    </li>
+    <li>
+      Fill out the fuel surcharge. -- This can stay as 0 if the bid requires fuel to be excluded.
+    </li>
+    <li>
+      Ensure that you have the correct setting for accurate miles. -- This has been set to false (unchecked) for previous runs but it is an option if needed
+    </li>
+    <li>
+      Upload the CSV file.
+    </li>
+    <li>
+      In the column mapping, you need to set the names of the columns to the names of the columns in the CSV file.
+    </li>
+    <li>
+      Click the "Run" and wait. Please be patient as it can take a while to run since it is calling google's servers.
+    </li>
+    <li>
+      When ready it will show you the results that you can download
+    </li>
+    <li>
+      Copy and paste the results into the excel file.
+    </li>
+  </ol>
+</div> 
