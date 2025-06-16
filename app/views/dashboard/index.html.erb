@@ -1,4 +1,9 @@
-<h1>Welcome to the Dashboard</h1>
+<div class="d-flex align-items-center mb-3">
+    <h1 class="me-2">Welcome to the Dashboard</h1>
+    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#helpModalDashboard" title="Help & Instructions">
+        <i class="fas fa-question-circle"></i>
+    </button>
+</div>
 <%= form_with url: mass_message_admin_path, method: :post, html: { class: "form-group" } do |form| %>
     <div class="form-group">
         <%= form.label :message, "Message to drivers:" %>
@@ -6,3 +11,6 @@
     </div>
     <%= form.submit "Send Message", class: "btn btn-primary" %>
 <% end %>
+
+<!-- Help Modal -->
+<%= render 'shared/help_modal', page_name: 'dashboard', page_title: 'Dashboard' %>
