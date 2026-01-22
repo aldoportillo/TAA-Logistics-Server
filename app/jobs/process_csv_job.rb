@@ -166,6 +166,31 @@ class ProcessCsvJob < ApplicationJob
 
   private
 
+  # Detect and read file with proper encoding
+  def read_file_with_encoding(file_path)
+    # Try different encodings in order of likelihood
+    encodings_to_try = [
+      'UTF-8',
+      'Windows-1252',  # Common for Excel exports
+      'ISO-8859-1',    # Latin-1
+      'CP1252'         # Windows code page
+    ]
+
+    encodings_to_try.each do |encoding|
+      begin
+        content = File.read(file_path, encoding: encoding)
+        # If we successfully read it, convert to UTF-8
+        return content.encode('UTF-8', invalid: :replace, undef: :replace, replace: '')
+      rescue Encoding::InvalidByteSequenceError, Encoding::UndefinedConversionError
+        # Try next encoding
+        next
+      end
+    end
+
+    # Fallback: force UTF-8 with replacements
+    File.read(file_path, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '')
+  end
+
   def calculate_line_haul_including_fuel(miles, rate)
     PricingMatrix.line_haul_for_miles(miles, rate, fuel_included: true)
   end
@@ -333,9 +358,10 @@ class ProcessCsvJob < ApplicationJob
   # Dynamic CSV parsing that finds the actual header row
   def parse_csv_with_dynamic_headers(csv_path, params)
     pp "=== DYNAMIC CSV HEADER DETECTION ==="
-    
-    # Read raw lines to find header row
-    raw_lines = File.readlines(csv_path).map(&:strip)
+
+    # Read raw lines to find header row with proper encoding
+    content = read_file_with_encoding(csv_path)
+    raw_lines = content.lines.map(&:strip)
     pp "Total lines in file: #{raw_lines.length}"
     
     # Show first 15 lines for debugging
@@ -387,9 +413,9 @@ class ProcessCsvJob < ApplicationJob
   def find_row_with_column_names(lines, target_columns)
     lines.each_with_index do |line, index|
       next if line.blank?
-      
+
       begin
-        columns = CSV.parse_line(line)&.map(&:to_s)&.map(&:strip) || []
+        columns = CSV.parse_line(line, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '')&.map(&:to_s)&.map(&:strip) || []
         next if columns.empty?
         
         pp "Checking row #{index + 1}: #{columns}"
@@ -424,9 +450,9 @@ class ProcessCsvJob < ApplicationJob
   # Parse CSV starting from the row after the header row
   def parse_csv_starting_after_row(csv_path, header_row_index)
     parsing_options = [
-      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true },
-      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true, col_sep: ';' },
-      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true, col_sep: '\t' }
+      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true, file_encoding: 'UTF-8', invalid_byte_sequence: '' },
+      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true, col_sep: ';', file_encoding: 'UTF-8', invalid_byte_sequence: '' },
+      { headers_in_file: true, skip_lines: header_row_index, remove_empty_values: true, strip_whitespace: true, col_sep: '\t', file_encoding: 'UTF-8', invalid_byte_sequence: '' }
     ]
     
     parsing_options.each_with_index do |options, i|
@@ -464,10 +490,10 @@ class ProcessCsvJob < ApplicationJob
   def find_header_row(lines)
     lines.each_with_index do |line, index|
       next if line.blank?
-      
+
       # Parse the line as CSV to get columns
       begin
-        columns = CSV.parse_line(line)&.map(&:to_s)&.map(&:strip) || []
+        columns = CSV.parse_line(line, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '')&.map(&:to_s)&.map(&:strip) || []
         next if columns.empty?
         
         pp "Line #{index + 1}: #{columns}"
@@ -536,7 +562,9 @@ class ProcessCsvJob < ApplicationJob
           skip_lines: attempt_params[:skip_lines],
           remove_empty_values: true,
           strip_whitespace: true,
-          col_sep: attempt_params[:col_sep]
+          col_sep: attempt_params[:col_sep],
+          file_encoding: 'UTF-8',
+          invalid_byte_sequence: ''
         }
         
         csv_data = SmarterCSV.process(csv_path, options)
@@ -846,7 +874,7 @@ class ProcessCsvJob < ApplicationJob
     
     if search_columns.empty?
       Rails.logger.info "No user columns specified, falling back to smart detection"
-      return parse_csv_smart_detection(file_path)
+      return { data: parse_csv_with_dynamic_headers(file_path, params), headers: [], total_rows: 0 }
     end
     
     header_row_index = nil
@@ -854,7 +882,7 @@ class ProcessCsvJob < ApplicationJob
     
     # Read CSV line by line to find header row
     current_line = 0
-    CSV.foreach(file_path, headers: false, liberal_parsing: true) do |row|
+    CSV.foreach(file_path, headers: false, liberal_parsing: true, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '') do |row|
       current_line += 1
       next if row.nil? || row.empty?
       
@@ -888,7 +916,7 @@ class ProcessCsvJob < ApplicationJob
     if header_row_index.nil?
       Rails.logger.error "Could not find header row containing all specified columns: #{search_columns}"
       Rails.logger.info "Falling back to smart detection"
-      return parse_csv_smart_detection(file_path)
+      return { data: parse_csv_with_dynamic_headers(file_path, params), headers: [], total_rows: 0 }
     end
     
     # Now parse the CSV starting from the row after the header
@@ -898,8 +926,8 @@ class ProcessCsvJob < ApplicationJob
     parsed_data = []
     row_count = 0
     current_row = 0
-    
-    CSV.foreach(file_path, headers: false, liberal_parsing: true) do |row|
+
+    CSV.foreach(file_path, headers: false, liberal_parsing: true, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '') do |row|
       current_row += 1
       
       # Skip until we reach the data start row
