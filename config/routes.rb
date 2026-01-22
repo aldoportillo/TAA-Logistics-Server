@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :ports
   resources :pricing_matrices
   resources :inquiries
-  resources :applications
+  resources :applications do
+    member do
+      get :download_pdf
+    end
+  end
   resources :quotes
   devise_for :users
 

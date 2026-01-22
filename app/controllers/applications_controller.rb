@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: %i[ show edit update destroy ]
+  before_action :set_application, only: %i[ show edit update destroy download_pdf ]
   skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
   # GET /applications or /applications.json
@@ -56,6 +56,24 @@ class ApplicationsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @application.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # GET /applications/1/download_pdf
+  def download_pdf
+    # authorize @application, policy_class: JobApplicationPolicy
+
+    begin
+      pdf_filler = ApplicationPdfFiller.new(@application)
+      pdf_content = pdf_filler.fill_and_generate
+
+      send_data pdf_content,
+                filename: "application_#{@application.id}_#{@application.last_name}.pdf",
+                type: 'application/pdf',
+                disposition: 'attachment'
+    rescue StandardError => e
+      Rails.logger.error "PDF generation failed: #{e.message}"
+      redirect_to @application, alert: "Failed to generate PDF: #{e.message}"
     end
   end
 

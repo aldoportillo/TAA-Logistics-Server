@@ -49,6 +49,10 @@ gem 'pundit'
 
 gem "smarter_csv"
 
+# Gem for filling PDF forms
+gem 'prawn'
+gem 'combine_pdf'
+
 # Gem for CORS support [
 gem 'rack-cors'
 
