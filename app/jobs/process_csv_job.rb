@@ -861,126 +861,128 @@ class ProcessCsvJob < ApplicationJob
   def parse_csv_with_user_columns(file_path, params)
     Rails.logger.info "=== PARSING CSV WITH USER-SPECIFIED COLUMNS ==="
     Rails.logger.info "User specified columns: #{[params[:origin_column], params[:origin_state_column], params[:destination_column], params[:destination_state_column]].compact}"
-    
+
     # Get the column names we're looking for
     search_columns = [
       params[:origin_column],
-      params[:origin_state_column], 
+      params[:origin_state_column],
       params[:destination_column],
       params[:destination_state_column]
     ].compact.reject(&:blank?)
-    
+
     Rails.logger.info "Searching for columns: #{search_columns}"
-    
+
     if search_columns.empty?
       Rails.logger.info "No user columns specified, falling back to smart detection"
       return { data: parse_csv_with_dynamic_headers(file_path, params), headers: [], total_rows: 0 }
     end
-    
+
+    # Read file with proper encoding detection to handle non-UTF-8 files
+    file_content = read_file_with_encoding(file_path)
+    csv_rows = CSV.parse(file_content, headers: false, liberal_parsing: true)
+
     header_row_index = nil
     column_positions = {}
-    
-    # Read CSV line by line to find header row
-    current_line = 0
-    CSV.foreach(file_path, headers: false, liberal_parsing: true, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '') do |row|
-      current_line += 1
+
+    # Search for header row
+    csv_rows.each_with_index do |row, index|
+      current_line = index + 1
       next if row.nil? || row.empty?
-      
+
       Rails.logger.info "Checking row #{current_line}: #{row.to_a.inspect}"
-      
+
       # Check if this row contains all our search columns
       found_columns = {}
       search_columns.each do |search_col|
         row.each_with_index do |cell, col_index|
           if cell.to_s.strip.downcase == search_col.to_s.strip.downcase
             found_columns[search_col] = col_index
-            Rails.logger.info "  ✓ Found '#{search_col}' at column #{col_index}"
+            Rails.logger.info "  Found '#{search_col}' at column #{col_index}"
             break
           end
         end
       end
-      
+
       # If we found all columns, this is our header row
       if found_columns.size == search_columns.size
         header_row_index = current_line
         column_positions = found_columns
-        Rails.logger.info "🎉 FOUND HEADER ROW at line #{header_row_index}!"
+        Rails.logger.info "FOUND HEADER ROW at line #{header_row_index}!"
         Rails.logger.info "Column positions: #{column_positions}"
         break
       else
         missing = search_columns - found_columns.keys
-        Rails.logger.info "  ✗ Missing columns: #{missing}"
+        Rails.logger.info "  Missing columns: #{missing}"
       end
     end
-    
+
     if header_row_index.nil?
       Rails.logger.error "Could not find header row containing all specified columns: #{search_columns}"
       Rails.logger.info "Falling back to smart detection"
       return { data: parse_csv_with_dynamic_headers(file_path, params), headers: [], total_rows: 0 }
     end
-    
+
     # Now parse the CSV starting from the row after the header
     data_start_row = header_row_index + 1
     Rails.logger.info "Starting data parsing from row #{data_start_row}"
-    
+
     parsed_data = []
     row_count = 0
-    current_row = 0
 
-    CSV.foreach(file_path, headers: false, liberal_parsing: true, encoding: 'UTF-8', invalid: :replace, undef: :replace, replace: '') do |row|
-      current_row += 1
-      
+    csv_rows.each_with_index do |row, index|
+      current_row = index + 1
+
       # Skip until we reach the data start row
       next if current_row < data_start_row
       next if row.nil? || row.empty?
-      
+
       row_count += 1
-      
+
       # Log first few rows for debugging
       if row_count <= 5
         Rails.logger.info "Processing row #{current_row}: #{row.to_a.inspect}"
       end
-      
+
       # Extract data using our found column positions
       origin_data = extract_column_data(row, column_positions, params[:origin_column])
       origin_state_data = extract_column_data(row, column_positions, params[:origin_state_column])
       destination_data = extract_column_data(row, column_positions, params[:destination_column])
       destination_state_data = extract_column_data(row, column_positions, params[:destination_state_column])
-      
+
       # Log extraction results for debugging
       if row_count <= 5
         Rails.logger.info "  Origin data: '#{origin_data}', Origin state: '#{origin_state_data}'"
         Rails.logger.info "  Destination data: '#{destination_data}', Destination state: '#{destination_state_data}'"
       end
-      
+
       # Build the origin and destination strings
       origin = build_location_string(origin_data, origin_state_data)
       destination = build_location_string(destination_data, destination_state_data)
-      
+
       # Log final strings for debugging
       if row_count <= 5
         Rails.logger.info "  Final origin: '#{origin}', Final destination: '#{destination}'"
       end
-      
+
       if origin.present? && destination.present?
         parsed_data << {
           origin: origin,
           destination: destination,
           row_number: current_row
         }
-        
+
         if row_count <= 3  # Log first few rows for debugging
-          Rails.logger.info "✓ Row #{current_row}: #{origin} → #{destination}"
+          Rails.logger.info "Row #{current_row}: #{origin} -> #{destination}"
         end
       else
         if row_count <= 5
-          Rails.logger.info "✗ Skipping row #{current_row}: origin='#{origin}', destination='#{destination}'"
+          Rails.logger.info "Skipping row #{current_row}: origin='#{origin}', destination='#{destination}'"
         end
       end
     end
-    
+
     Rails.logger.info "Successfully parsed #{parsed_data.size} rows using user-specified columns"
-    
+
     {
       data: parsed_data,
       headers: search_columns,
