@@ -195,7 +195,7 @@ class ApplicationPdfGenerator
       "tractor_two_trailers_to" => format_date(application.tractor_two_trailers_to),
       "tractor_two_trailers_miles" => format_number(application.tractor_two_trailers_miles),
 
-      "other_type" => application.other_type,
+      "other_equipment_type" => application.other_equipment_type,
       "other_equipment_from" => format_date(application.other_equipment_from),
       "other_equipment_to" => format_date(application.other_equipment_to),
       "other_equipment_miles" => format_number(application.other_equipment_miles),

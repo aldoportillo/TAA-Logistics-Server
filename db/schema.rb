@@ -114,7 +114,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_24_191219) do
     t.date "tractor_two_trailers_from"
     t.date "tractor_two_trailers_to"
     t.integer "tractor_two_trailers_miles"
-    t.string "other_type"
+    t.string "other_equipment_type"
     t.date "other_equipment_from"
     t.date "other_equipment_to"
     t.integer "other_equipment_miles"

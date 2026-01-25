@@ -150,7 +150,7 @@ class ApplicationsController < ApplicationController
         :straight_truck_type, :straight_truck_from, :straight_truck_to, :straight_truck_miles,
         :tractor_semi_type, :tractor_semi_from, :tractor_semi_to, :tractor_semi_miles,
         :tractor_two_trailers_type, :tractor_two_trailers_from, :tractor_two_trailers_to, :tractor_two_trailers_miles,
-        :other_type, :other_equipment_from, :other_equipment_to, :other_equipment_miles,
+        :other_equipment_type, :other_equipment_from, :other_equipment_to, :other_equipment_miles,
 
         # --------------------
         # Accidents (ONLY 1–3)
