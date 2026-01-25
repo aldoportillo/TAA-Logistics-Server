@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: %i[ show edit update destroy download_pdf ]
+  before_action :set_application, only: %i[ show edit update destroy download_pdf document ]
   skip_before_action :verify_authenticity_token, only: [:create] # Will remove in production
 
   # GET /applications or /applications.json
@@ -61,19 +61,40 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1/download_pdf
   def download_pdf
-    # authorize @application, policy_class: JobApplicationPolicy
+    authorize @application, policy_class: JobApplicationPolicy
 
     begin
-      pdf_filler = ApplicationPdfFiller.new(@application)
-      pdf_content = pdf_filler.fill_and_generate
+      generator = ApplicationPdfGenerator.new(@application)
+      pdf_content = generator.render
 
       send_data pdf_content,
                 filename: "application_#{@application.id}_#{@application.last_name}.pdf",
-                type: 'application/pdf',
-                disposition: 'attachment'
+                type: "application/pdf",
+                disposition: "attachment"
     rescue StandardError => e
       Rails.logger.error "PDF generation failed: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
       redirect_to @application, alert: "Failed to generate PDF: #{e.message}"
+    end
+  end
+
+  # GET /applications/1/document
+  # Serves the PDF inline for embedding in the show page
+  def document
+    authorize @application, policy_class: JobApplicationPolicy
+
+    begin
+      generator = ApplicationPdfGenerator.new(@application)
+      pdf_content = generator.render
+
+      send_data pdf_content,
+                filename: "application_#{@application.id}.pdf",
+                type: "application/pdf",
+                disposition: "inline"
+    rescue StandardError => e
+      Rails.logger.error "PDF generation failed: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      head :internal_server_error
     end
   end
 

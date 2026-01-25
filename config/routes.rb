@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :applications do
     member do
       get :download_pdf
+      get :document  # Serves PDF inline for viewing
     end
   end
   resources :quotes
