@@ -110,7 +110,9 @@ class ApplicationPdfGenerator
   #
   def field_mappings
     {
+      # --------------------
       # Personal Info
+      # --------------------
       "first_name" => application.first_name,
       "middle_name" => application.middle_name,
       "last_name" => application.last_name,
@@ -125,7 +127,9 @@ class ApplicationPdfGenerator
       "phone" => application.phone,
       "email" => application.email,
 
-      # Residence 1
+      # --------------------
+      # Residences
+      # --------------------
       "residence_1_street" => application.residence_1_street,
       "residence_1_city" => application.residence_1_city,
       "residence_1_state" => application.residence_1_state,
@@ -133,7 +137,6 @@ class ApplicationPdfGenerator
       "residence_1_duration" => application.residence_1_duration,
       "residence_1_full" => residence_line(1),
 
-      # Residence 2
       "residence_2_street" => application.residence_2_street,
       "residence_2_city" => application.residence_2_city,
       "residence_2_state" => application.residence_2_state,
@@ -141,7 +144,6 @@ class ApplicationPdfGenerator
       "residence_2_duration" => application.residence_2_duration,
       "residence_2_full" => residence_line(2),
 
-      # Residence 3
       "residence_3_street" => application.residence_3_street,
       "residence_3_city" => application.residence_3_city,
       "residence_3_state" => application.residence_3_state,
@@ -149,25 +151,17 @@ class ApplicationPdfGenerator
       "residence_3_duration" => application.residence_3_duration,
       "residence_3_full" => residence_line(3),
 
-      # License 1
-      "license_1_state" => application.license_1_state,
-      "license_1_number" => application.license_1_number,
-      "license_1_type" => application.license_1_type,
-      "license_1_expiration" => format_date(application.license_1_expiration),
+      # --------------------
+      # License (SINGLE)
+      # --------------------
+      "license_state" => application.license_state,
+      "license_number" => application.license_number,
+      "license_type" => application.license_type,
+      "license_expiration_date" => format_date(application.license_expiration_date),
 
-      # License 2
-      "license_2_state" => application.license_2_state,
-      "license_2_number" => application.license_2_number,
-      "license_2_type" => application.license_2_type,
-      "license_2_expiration" => format_date(application.license_2_expiration),
-
-      # License 3
-      "license_3_state" => application.license_3_state,
-      "license_3_number" => application.license_3_number,
-      "license_3_type" => application.license_3_type,
-      "license_3_expiration" => format_date(application.license_3_expiration),
-
-      # Convictions
+      # --------------------
+      # Convictions (1–3 ONLY)
+      # --------------------
       "conviction_1_date" => format_date(application.conviction_1_date),
       "conviction_1_violation" => application.conviction_1_violation,
       "conviction_1_state" => application.conviction_1_state,
@@ -183,35 +177,32 @@ class ApplicationPdfGenerator
       "conviction_3_state" => application.conviction_3_state,
       "conviction_3_penalty" => application.conviction_3_penalty,
 
-      "conviction_4_date" => format_date(application.conviction_4_date),
-      "conviction_4_violation" => application.conviction_4_violation,
-      "conviction_4_state" => application.conviction_4_state,
-      "conviction_4_penalty" => application.conviction_4_penalty,
-
-      "conviction_5_date" => format_date(application.conviction_5_date),
-      "conviction_5_violation" => application.conviction_5_violation,
-      "conviction_5_state" => application.conviction_5_state,
-      "conviction_5_penalty" => application.conviction_5_penalty,
-
+      # --------------------
       # Driving Experience
+      # --------------------
+      "straight_truck_type" => application.straight_truck_type,
       "straight_truck_from" => format_date(application.straight_truck_from),
       "straight_truck_to" => format_date(application.straight_truck_to),
       "straight_truck_miles" => format_number(application.straight_truck_miles),
 
+      "tractor_semi_type" => application.tractor_semi_type,
       "tractor_semi_from" => format_date(application.tractor_semi_from),
       "tractor_semi_to" => format_date(application.tractor_semi_to),
       "tractor_semi_miles" => format_number(application.tractor_semi_miles),
 
+      "tractor_two_trailers_type" => application.tractor_two_trailers_type,
       "tractor_two_trailers_from" => format_date(application.tractor_two_trailers_from),
       "tractor_two_trailers_to" => format_date(application.tractor_two_trailers_to),
       "tractor_two_trailers_miles" => format_number(application.tractor_two_trailers_miles),
 
-      "other_equipment_description" => application.other_equipment_description,
+      "other_type" => application.other_type,
       "other_equipment_from" => format_date(application.other_equipment_from),
       "other_equipment_to" => format_date(application.other_equipment_to),
       "other_equipment_miles" => format_number(application.other_equipment_miles),
 
-      # Accidents
+      # --------------------
+      # Accidents (1–3 ONLY)
+      # --------------------
       "accident_1_date" => format_date(application.accident_1_date),
       "accident_1_nature" => application.accident_1_nature,
       "accident_1_fatalities" => application.accident_1_fatalities&.to_s,
@@ -230,7 +221,9 @@ class ApplicationPdfGenerator
       "accident_3_injuries" => application.accident_3_injuries&.to_s,
       "accident_3_chemical_spill" => yes_no(application.accident_3_chemical_spill),
 
-      # FMCSR Questions (checkboxes)
+      # --------------------
+      # FMCSA Questions
+      # --------------------
       "currently_disqualified" => application.currently_disqualified,
       "currently_disqualified_yes" => application.currently_disqualified == true,
       "currently_disqualified_no" => application.currently_disqualified == false,
@@ -271,7 +264,9 @@ class ApplicationPdfGenerator
       "left_scene_yes" => application.left_scene_of_accident == true,
       "left_scene_no" => application.left_scene_of_accident == false,
 
-      # Employer 1
+      # --------------------
+      # Employers (1–3)
+      # --------------------
       "employer_1_name" => application.employer_1_name,
       "employer_1_street" => application.employer_1_street,
       "employer_1_city" => application.employer_1_city,
@@ -331,7 +326,9 @@ class ApplicationPdfGenerator
       "employer_3_safety_yes" => application.employer_3_safety_sensitive == true,
       "employer_3_safety_no" => application.employer_3_safety_sensitive == false,
 
+      # --------------------
       # Employment Gaps
+      # --------------------
       "gap_1_from" => format_date(application.gap_1_from),
       "gap_1_to" => format_date(application.gap_1_to),
       "gap_1_reason" => application.gap_1_reason,
@@ -342,13 +339,14 @@ class ApplicationPdfGenerator
       "gap_2_reason" => application.gap_2_reason,
       "gap_2_full" => gap_explanation(2),
 
-      # Signature Fields
+      # --------------------
+      # Signature / Metadata
+      # --------------------
       "signature_full_name" => application.signature_full_name,
       "signature_date" => format_date(application.signature_timestamp),
       "applicant_signature" => application.signature_full_name,
       "applicant_signature_date" => format_date(application.signature_timestamp),
 
-      # Page 8 - Safety Performance History
       "sph_full_name" => full_name,
       "sph_ssn" => application.ssn,
       "sph_dob" => format_date(application.date_of_birth),
@@ -356,12 +354,12 @@ class ApplicationPdfGenerator
       "sph_applicant_signature" => application.signature_full_name,
       "sph_signature_date" => format_date(application.signature_timestamp),
 
-      # Previous employer for SPH (using employer_1)
       "sph_previous_employer" => application.employer_1_name,
       "sph_previous_employer_phone" => application.employer_1_phone,
       "sph_previous_employer_street" => application.employer_1_street,
       "sph_previous_employer_city_state_zip" => employer_city_state_zip(1)
     }
+
   end
 
   # ===========================================
