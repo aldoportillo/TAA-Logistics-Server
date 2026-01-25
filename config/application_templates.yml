@@ -1,0 +1,23 @@
+# Application PDF Template Versions
+#
+# IMPORTANT: Never modify an existing template version.
+# To make changes, create a new version and add it here.
+#
+# Each version contains:
+#   - file: path to the template file (relative to Rails.root)
+#   - hash: SHA-256 hash of the template file for integrity verification
+#   - created_at: date the template was created
+#   - render_engine: the gem/version used to fill this template
+#
+# The hash ensures we can prove which exact document was signed
+# (required for DOT/FMCSA compliance per 49 CFR Parts 391 and 40)
+
+default_version: v1
+
+versions:
+  v1:
+    file: app/assets/templates/taa-application-v1.pdf
+    hash: e2139460e4a2dc004d069ec8bd6631b7c3cb3f78764377f52abdcb1ef281eb6f
+    created_at: "2026-01-24"
+    render_engine: prawn
+    notes: Initial DOT-compliant employment application template
