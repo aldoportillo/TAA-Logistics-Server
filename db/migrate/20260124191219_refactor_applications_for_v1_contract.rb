@@ -92,7 +92,7 @@ class RefactorApplicationsForV1Contract < ActiveRecord::Migration[7.1]
     add_column :applications, :tractor_two_trailers_to, :date
     add_column :applications, :tractor_two_trailers_miles, :integer
 
-    add_column :applications, :other_type, :string
+    add_column :applications, :other_equipment_type, :string
     add_column :applications, :other_equipment_from, :date
     add_column :applications, :other_equipment_to, :date
     add_column :applications, :other_equipment_miles, :integer
