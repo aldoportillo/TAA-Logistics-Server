@@ -20,11 +20,6 @@ class RefactorApplicationsForV1Contract < ActiveRecord::Migration[7.1]
     rename_column :applications, :residency_state_3, :residence_3_state
     rename_column :applications, :residency_zip_3, :residence_3_zip
 
-    rename_column :applications, :license_state, :license_1_state
-    rename_column :applications, :license_number, :license_1_number
-    rename_column :applications, :license_type, :license_1_type
-    rename_column :applications, :license_expiration_date, :license_1_expiration
-
     rename_column :applications, :conviction_date_1, :conviction_1_date
     rename_column :applications, :conviction_violation_1, :conviction_1_violation
     rename_column :applications, :conviction_state_1, :conviction_1_state
@@ -82,39 +77,22 @@ class RefactorApplicationsForV1Contract < ActiveRecord::Migration[7.1]
     add_column :applications, :residence_2_duration, :string
     add_column :applications, :residence_3_duration, :string
 
-    add_column :applications, :license_2_state, :string
-    add_column :applications, :license_2_number, :string
-    add_column :applications, :license_2_type, :string
-    add_column :applications, :license_2_expiration, :date
-
-    add_column :applications, :license_3_state, :string
-    add_column :applications, :license_3_number, :string
-    add_column :applications, :license_3_type, :string
-    add_column :applications, :license_3_expiration, :date
-
-    add_column :applications, :conviction_4_date, :date
-    add_column :applications, :conviction_4_violation, :string
-    add_column :applications, :conviction_4_state, :string
-    add_column :applications, :conviction_4_penalty, :string
-
-    add_column :applications, :conviction_5_date, :date
-    add_column :applications, :conviction_5_violation, :string
-    add_column :applications, :conviction_5_state, :string
-    add_column :applications, :conviction_5_penalty, :string
-
+    add_column :applications, :straight_truck_type, :string
     add_column :applications, :straight_truck_from, :date
     add_column :applications, :straight_truck_to, :date
     add_column :applications, :straight_truck_miles, :integer
 
+    add_column :applications, :tractor_semi_type, :string
     add_column :applications, :tractor_semi_from, :date
     add_column :applications, :tractor_semi_to, :date
     add_column :applications, :tractor_semi_miles, :integer
 
+    add_column :applications, :tractor_two_trailers_type, :string
     add_column :applications, :tractor_two_trailers_from, :date
     add_column :applications, :tractor_two_trailers_to, :date
     add_column :applications, :tractor_two_trailers_miles, :integer
 
-    add_column :applications, :other_equipment_description, :string
+    add_column :applications, :other_type, :string
     add_column :applications, :other_equipment_from, :date
     add_column :applications, :other_equipment_to, :date
     add_column :applications, :other_equipment_miles, :integer
