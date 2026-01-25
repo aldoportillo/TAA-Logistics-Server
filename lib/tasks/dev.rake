@@ -354,6 +354,10 @@ namespace :db do
       gap_2_to: Date.new(2021, 8, 1),
       gap_2_reason: "Personal",
 
+      gap_3_from: Date.new(2020, 7, 1),
+      gap_3_to: Date.new(2020, 8, 1),
+      gap_3_reason: "Won Lottery",
+
       # --------------------
       # Signature & Metadata
       # --------------------

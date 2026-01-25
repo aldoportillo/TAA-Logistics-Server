@@ -158,6 +158,10 @@ class RefactorApplicationsForV1Contract < ActiveRecord::Migration[7.1]
     add_column :applications, :gap_2_to, :date
     add_column :applications, :gap_2_reason, :string
 
+    add_column :applications, :gap_3_from, :date
+    add_column :applications, :gap_3_to, :date
+    add_column :applications, :gap_3_reason, :string
+
     add_column :applications, :esign_consent, :boolean
     add_column :applications, :esign_consent_at, :datetime
     add_column :applications, :esign_consent_text, :text

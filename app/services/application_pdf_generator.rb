@@ -339,6 +339,11 @@ class ApplicationPdfGenerator
       "gap_2_reason" => application.gap_2_reason,
       "gap_2_full" => gap_explanation(2),
 
+      "gap_3_from" => format_date(application.gap_3_from),
+      "gap_3_to" => format_date(application.gap_3_to),
+      "gap_3_reason" => application.gap_3_reason,
+      "gap_3_full" => gap_explanation(3),
+
       # --------------------
       # Signature / Metadata
       # --------------------
