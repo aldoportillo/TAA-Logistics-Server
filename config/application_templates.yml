@@ -17,7 +17,7 @@ default_version: v1
 versions:
   v1:
     file: app/assets/templates/taa-application-v1.pdf
-    hash: caacb31a401373d9dbf2b396b898c1af7b38529d4fdc0db73107e0171f428bdb
+    hash: cd4ac741071ba411ed422992a1e4d0dc0a0e21ef5a8ea24d61c11c0ad9eb16e7
     created_at: "2026-01-24"
     render_engine: prawn
     notes: Initial DOT-compliant employment application template
