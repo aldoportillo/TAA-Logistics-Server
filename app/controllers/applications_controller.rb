@@ -117,6 +117,73 @@ class ApplicationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def application_params
-      params.require(:application).permit(:first_name, :middle_initial, :last_name, :address, :city, :state, :zip, :birthday, :ssn, :phone_number, :email, :residency_address_1, :residency_city_1, :residency_state_1, :residency_zip_1, :residency_address_2, :residency_city_2, :residency_state_2, :residency_zip_2, :residency_address_3, :residency_city_3, :residency_state_3, :residency_zip_3, :license_state, :license_number, :license_type, :license_expiration_date, :conviction_date_1, :conviction_violation_1, :conviction_state_1, :conviction_penalty_1, :conviction_date_2, :conviction_violation_2, :conviction_state_2, :conviction_penalty_2, :conviction_date_3, :conviction_violation_3, :conviction_state_3, :conviction_penalty_3, :experience_class_1, :experience_type_1, :experience_start_date_1, :experience_end_date_1, :experience_miles_1, :experience_class_2, :experience_type_2, :experience_start_date_2, :experience_end_date_2, :experience_miles_2, :experience_class_3, :experience_type_3, :experience_start_date_3, :experience_end_date_3, :experience_miles_3, :accident_date_1, :accident_nature_1, :accident_fatalities_1, :accident_injuries_1, :accident_spill_1, :accident_date_2, :accident_nature_2, :accident_fatalities_2, :accident_injuries_2, :accident_spill_2, :accident_date_3, :accident_nature_3, :accident_fatalities_3, :accident_injuries_3, :accident_spill_3, :contacted)
+      params.require(:application).permit(
+        # Personal Info
+        :first_name, :middle_name, :last_name,
+        :street, :city, :state, :zip,
+        :date_of_birth, :ssn, :phone, :email,
+
+        # Residences
+        :residence_1_street, :residence_1_city, :residence_1_state, :residence_1_zip, :residence_1_duration,
+        :residence_2_street, :residence_2_city, :residence_2_state, :residence_2_zip, :residence_2_duration,
+        :residence_3_street, :residence_3_city, :residence_3_state, :residence_3_zip, :residence_3_duration,
+
+        # Licenses
+        :license_1_state, :license_1_number, :license_1_type, :license_1_expiration,
+        :license_2_state, :license_2_number, :license_2_type, :license_2_expiration,
+        :license_3_state, :license_3_number, :license_3_type, :license_3_expiration,
+
+        # Convictions
+        :conviction_1_date, :conviction_1_violation, :conviction_1_state, :conviction_1_penalty,
+        :conviction_2_date, :conviction_2_violation, :conviction_2_state, :conviction_2_penalty,
+        :conviction_3_date, :conviction_3_violation, :conviction_3_state, :conviction_3_penalty,
+        :conviction_4_date, :conviction_4_violation, :conviction_4_state, :conviction_4_penalty,
+        :conviction_5_date, :conviction_5_violation, :conviction_5_state, :conviction_5_penalty,
+
+        # Driving Experience
+        :straight_truck_from, :straight_truck_to, :straight_truck_miles,
+        :tractor_semi_from, :tractor_semi_to, :tractor_semi_miles,
+        :tractor_two_trailers_from, :tractor_two_trailers_to, :tractor_two_trailers_miles,
+        :other_equipment_description, :other_equipment_from, :other_equipment_to, :other_equipment_miles,
+
+        # Accidents
+        :accident_1_date, :accident_1_nature, :accident_1_fatalities, :accident_1_injuries, :accident_1_chemical_spill,
+        :accident_2_date, :accident_2_nature, :accident_2_fatalities, :accident_2_injuries, :accident_2_chemical_spill,
+        :accident_3_date, :accident_3_nature, :accident_3_fatalities, :accident_3_injuries, :accident_3_chemical_spill,
+
+        # FMCSR Questions
+        :currently_disqualified, :license_suspended, :license_denied,
+        :positive_drug_test_last_2_years, :bac_over_point04, :dui,
+        :refused_testing, :controlled_substance_violation,
+        :drug_transport_possession, :left_scene_of_accident,
+
+        # Employers
+        :employer_1_name, :employer_1_street, :employer_1_city, :employer_1_state, :employer_1_zip,
+        :employer_1_phone, :employer_1_position, :employer_1_salary, :employer_1_from, :employer_1_to,
+        :employer_1_reason_for_leaving, :employer_1_subject_to_fmcsa, :employer_1_safety_sensitive,
+
+        :employer_2_name, :employer_2_street, :employer_2_city, :employer_2_state, :employer_2_zip,
+        :employer_2_phone, :employer_2_position, :employer_2_salary, :employer_2_from, :employer_2_to,
+        :employer_2_reason_for_leaving, :employer_2_subject_to_fmcsa, :employer_2_safety_sensitive,
+
+        :employer_3_name, :employer_3_street, :employer_3_city, :employer_3_state, :employer_3_zip,
+        :employer_3_phone, :employer_3_position, :employer_3_salary, :employer_3_from, :employer_3_to,
+        :employer_3_reason_for_leaving, :employer_3_subject_to_fmcsa, :employer_3_safety_sensitive,
+
+        # Employment Gaps
+        :gap_1_from, :gap_1_to, :gap_1_reason,
+        :gap_2_from, :gap_2_to, :gap_2_reason,
+
+        # E-Signature
+        :esign_consent, :esign_consent_at, :esign_consent_text,
+        :signature_full_name, :signature_method, :signature_timestamp,
+        :signing_ip_address, :signing_user_agent,
+
+        # Template/Version Tracking
+        :template_version, :template_hash, :render_engine_version,
+
+        # Submission
+        :submitted_at, :pdf_version
+      )
     end
 end

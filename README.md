@@ -123,3 +123,11 @@ Regular Archiving: Set a regular schedule for archiving (e.g., every 6 months) t
 Backup Archives: Regularly back up the .pst files to an external drive or cloud storage to prevent data loss.
 Folder Organization: Maintain a consistent folder structure within the archive for easy navigation and retrieval.
 By following these steps, your client will have a seamless experience accessing their archived emails in Outlook without worrying about running out of email server storage.
+
+## Compliance
+
+For DOT compliance, we cannot modify an application only create a new one. This needs to have its own sha encryption follow the following steps to create a SHA and make the new pdf usable:
+
+  1. Get the new hash: `shasum -a 256 app/assets/templates/taa-application-v1.pdf`
+  2. Copy the hash (the long string before the filename)
+  3. Update config/application_templates.yml

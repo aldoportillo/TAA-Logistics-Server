@@ -77,7 +77,11 @@ class ApplicationPdfGenerator
 
     case field.field_type
     when :Btn # Checkbox or radio button
-      field.field_value = value ? "Yes" : "Off"
+      # Only check the box if value is true; skip if false (leave unchecked)
+      return unless value == true
+      # Try common checkbox export values
+      allowed = field.allowed_values rescue ["Yes", "On", "1"]
+      field.field_value = allowed.find { |v| v != "Off" } || "Yes"
     when :Tx  # Text field
       field.field_value = value.to_s
     when :Ch  # Choice (dropdown/list)
