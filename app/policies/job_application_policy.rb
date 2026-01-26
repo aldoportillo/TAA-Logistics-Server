@@ -19,6 +19,14 @@ class JobApplicationPolicy < ApplicationPolicy
     user&.admin?
   end
 
+  def download_pdf?
+    user&.admin? || user&.hiring?
+  end
+
+  def document?
+    user&.admin? || user&.hiring?
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       if user&.admin? || user&.hiring?

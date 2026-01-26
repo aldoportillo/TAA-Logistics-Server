@@ -1,13 +1,33 @@
 <p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
 
-<div class="d-flex justify-content-between align-items-center">
-  <h1>Application Details</h1>
-  <div>
-    <%= link_to "Back to applications", applications_path, class: "btn btn-primary" %> |
-    <%= button_to "Destroy this application", @application, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Application: <%= @application.first_name %> <%= @application.last_name %></h1>
+  <div class="d-flex gap-2">
+    <%= link_to "Back to applications", applications_path, class: "btn btn-secondary" %>
+    <%= link_to "Download PDF", download_pdf_application_path(@application), class: "btn btn-primary" %>
+    <button onclick="printPdf()" class="btn btn-success">Print</button>
+    <%= link_to "Edit", edit_application_path(@application), class: "btn btn-warning" %>
+    <%= button_to "Delete", @application, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
   </div>
 </div>
 
-<%= render @application %>
+<div class="card">
+  <div class="card-body p-0">
+    <iframe
+      id="pdf-viewer"
+      src="<%= document_application_path(@application) %>"
+      width="100%"
+      height="800px"
+      style="border: none;">
+    </iframe>
+  </div>
+</div>
 
-
+<script>
+  function printPdf() {
+    const iframe = document.getElementById('pdf-viewer');
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+  }
+</script>
